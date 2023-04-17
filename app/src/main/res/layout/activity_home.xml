@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.3"
+        android:layout_weight="0.2"
         android:orientation="vertical">
 
         <FrameLayout
@@ -31,12 +31,12 @@
 
             <ImageView
                 android:id="@+id/img_avatar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="142dp"
+                android:layout_height="145dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="50dp"
                 android:scaleType="fitXY"
-                tools:layout_conversion_absoluteHeight="128dp"
+                tools:layout_conversion_absoluteHeight="1280dp"
                 tools:layout_conversion_absoluteWidth="128dp"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="0dp"
@@ -47,10 +47,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="165dp"
+                android:layout_marginTop="200dp"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="Name Of You"
+                android:text="Your Name"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                />
+
+            <EditText
+                android:id="@+id/txt_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="250dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textAlignment="center"
+                android:text="Work Location"
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
@@ -72,11 +87,13 @@
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="108dp">
+                android:layout_height="match_parent"
+                android:gravity="center">
 
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_margin="16dp"
                     android:background="@drawable/btn_white_background">
 
                     <LinearLayout
@@ -88,21 +105,370 @@
                             android:id="@+id/btn_search"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="8dp"
-                            app:srcCompat="@drawable/circle_green"
                             android:layout_gravity="center_vertical|center_horizontal"
-                            />
+                            android:layout_margin="8dp"
+                            app:srcCompat="@drawable/circle_green" />
 
                         <TextView
-                            android:id="@+id/textView9"
+                            android:id="@+id/txt_btn_search"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|center_horizontal"
                             android:text="Search"
                             android:textAlignment="center"
                             android:textColor="#34346E"
-                            android:textStyle="bold"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/icon_search"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="15dp"
+                        app:srcCompat="@drawable/btn_search"
+
+                        />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/btn_white_background">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/btn_pay"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|center_horizontal"
-                            />
+                            android:layout_margin="8dp"
+                            app:srcCompat="@drawable/circle_green" />
+
+                        <TextView
+                            android:id="@+id/txt_btn_pay"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|center_horizontal"
+                            android:text="Pay"
+                            android:textAlignment="center"
+                            android:textColor="#34346E"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/icon_pay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="15dp"
+                        app:srcCompat="@drawable/btn_pay"
+
+                        />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/btn_white_background">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/btn_inventory"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|center_horizontal"
+                            android:layout_margin="8dp"
+                            app:srcCompat="@drawable/circle_green" />
+
+                        <TextView
+                            android:id="@+id/txt_btn_inventory"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|center_horizontal"
+                            android:text="Search"
+                            android:textAlignment="center"
+                            android:textColor="#34346E"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/icon_inventory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="17dp"
+                        app:srcCompat="@drawable/btn_inventory"
+
+                        />
+
+                </FrameLayout>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/btn_white_background">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/btn_createproduct"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|center_horizontal"
+                            android:layout_margin="8dp"
+                            app:srcCompat="@drawable/circle_green" />
+
+                        <TextView
+                            android:id="@+id/txt_btn_creatproduct"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|center_horizontal"
+                            android:text="Create\nProducts"
+                            android:textAlignment="center"
+                            android:textColor="#34346E"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/icon_settting"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="15dp"
+                        app:srcCompat="@drawable/btn_createproducts"
+
+                        />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/btn_white_background">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/btn_import"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|center_horizontal"
+                            android:layout_margin="8dp"
+                            app:srcCompat="@drawable/circle_green" />
+
+                        <TextView
+                            android:id="@+id/txt_btn_import"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|center_horizontal"
+                            android:text="Import"
+                            android:textAlignment="center"
+                            android:textColor="#34346E"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/icon_import"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="15dp"
+                        app:srcCompat="@drawable/btn_import"
+
+                        />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/btn_white_background">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/btn_export"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|center_horizontal"
+                            android:layout_margin="8dp"
+                            app:srcCompat="@drawable/circle_green" />
+
+                        <TextView
+                            android:id="@+id/txt_btn_export"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|center_horizontal"
+                            android:text="Export"
+                            android:textAlignment="center"
+                            android:textColor="#34346E"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/icon_export"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginStart="1dp"
+                        android:layout_marginTop="-1dp"
+                        app:srcCompat="@drawable/btn_export"
+
+                        />
+
+                </FrameLayout>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/btn_white_background">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/btn_setting"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|center_horizontal"
+                            android:layout_margin="8dp"
+                            app:srcCompat="@drawable/circle_green" />
+
+                        <TextView
+                            android:id="@+id/txt_btn_setting"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|center_horizontal"
+                            android:text="Setting"
+                            android:textAlignment="center"
+                            android:textColor="#34346E"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/icon_setting"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="22dp"
+                        app:srcCompat="@drawable/btn_4"
+
+                        />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/btn_white_background">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/btn_profile"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|center_horizontal"
+                            android:layout_margin="8dp"
+                            app:srcCompat="@drawable/circle_green" />
+
+                        <TextView
+                            android:id="@+id/txt_btn_profile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|center_horizontal"
+                            android:text="Profile"
+                            android:textAlignment="center"
+                            android:textColor="#34346E"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/icon_profile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="22dp"
+                        app:srcCompat="@drawable/btn_profile"
+
+                        />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/btn_white_background">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/btn_logout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|center_horizontal"
+                            android:layout_margin="8dp"
+                            app:srcCompat="@drawable/circle_green" />
+
+                        <TextView
+                            android:id="@+id/txt_btn_logout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|center_horizontal"
+                            android:text="Log Out"
+                            android:textAlignment="center"
+                            android:textColor="#34346E"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <ImageView
@@ -110,12 +476,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="20dp"
-                        app:srcCompat="@drawable/btn_search"
+                        android:layout_marginTop="25dp"
+                        app:srcCompat="@drawable/btn_6"
 
                         />
 
                 </FrameLayout>
+
             </TableRow>
 
         </TableLayout>

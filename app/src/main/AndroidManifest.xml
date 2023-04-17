@@ -29,6 +29,9 @@
             android:exported="false">
         </activity>
 
+        <activity android:name=".HomeActivity"
+            android:exported="false">
+        </activity>
     </application>
 
 </manifest>
