@@ -47,25 +47,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="200dp"
+                android:layout_marginTop="250dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:text="Your Name"
-                android:textSize="25dp"
-                android:textStyle="bold"
                 android:textAlignment="center"
-                />
+                android:textSize="25dp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/txt_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="250dp"
+                android:layout_marginTop="200dp"
                 android:ems="10"
                 android:inputType="textPersonName"
+                android:text="ID"
                 android:textAlignment="center"
-                android:text="Work Location"
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
@@ -198,7 +197,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|center_horizontal"
-                            android:text="Search"
+                            android:text="Inventory"
                             android:textAlignment="center"
                             android:textColor="#34346E"
                             android:textStyle="bold" />

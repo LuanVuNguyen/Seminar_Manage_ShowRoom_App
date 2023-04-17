@@ -161,8 +161,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
-            android:orientation="vertical">
+            android:layout_weight="2">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -180,7 +179,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginBottom="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/shape_btn_menu_deviceconnection" />
+                    android:background="@drawable/btn_menuconnection" />
 
             </LinearLayout>
 
@@ -202,45 +201,8 @@
                     android:layout_alignRight="@+id/menu_barcode"
                     android:layout_marginBottom="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/shape_btn_menu_setting" />
+                    android:background="@drawable/btn_setting" />
 
-                <ImageView
-                    android:id="@+id/menu_read"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignLeft="@+id/menu_deviceconnection"
-                    android:layout_alignTop="@+id/menu_setting"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/shape_btn_menu_read" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="20dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/menu_barcode"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="5dp"
-                    android:layout_toRightOf="@+id/menu_setting"
-                    android:layout_weight="1"
-                    android:background="@drawable/shape_btn_menu_barcode" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignLeft="@+id/menu_read"
-                    android:layout_alignTop="@+id/menu_barcode"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1" />
             </LinearLayout>
         </LinearLayout>
 
