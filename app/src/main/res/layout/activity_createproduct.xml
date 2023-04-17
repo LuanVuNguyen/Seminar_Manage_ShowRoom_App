@@ -13,6 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:background="#D3E1EC"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -30,9 +31,10 @@
                         android:id="@+id/txt_bookname"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
                         android:layout_weight="1"
                         android:gravity="center_horizontal|center_vertical"
-                        android:text="Name"
+                        android:text="Name: "
                         android:textAlignment="center"
                         android:textColor="#000000"
                         android:textStyle="bold" />
@@ -41,9 +43,10 @@
                         android:id="@+id/txt_author"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
                         android:layout_weight="1"
                         android:gravity="center_horizontal|center_vertical"
-                        android:text="Author"
+                        android:text="Author:"
                         android:textColor="#000000"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -56,28 +59,25 @@
                     <EditText
                         android:id="@+id/txt_edit_bookname"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
 
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
                         android:background="@drawable/edittext_background"
                         android:drawablePadding="16dp"
                         android:ems="10"
                         android:hint="Book name"
                         android:inputType="textPersonName"
                         android:padding="16dp"
+                        android:textAlignment="center"
                         android:textColorHint="#3D608c"
-                        android:textSize="18dp" />
+                        android:textSize="14sp" />
 
                     <EditText
                         android:id="@+id/txt_edit_author"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
                         android:layout_weight="1"
                         android:background="@drawable/edittext_background"
                         android:drawablePadding="16dp"
@@ -85,8 +85,9 @@
                         android:hint="Author"
                         android:inputType="textPersonName"
                         android:padding="16dp"
+                        android:textAlignment="center"
                         android:textColorHint="#3D608c"
-                        android:textSize="18dp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -105,9 +106,10 @@
                         android:id="@+id/textView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
                         android:layout_weight="1"
                         android:gravity="center_horizontal|center_vertical"
-                        android:text="Category"
+                        android:text="Category:"
                         android:textAlignment="center"
                         android:textColor="#000000"
                         android:textStyle="bold" />
@@ -116,9 +118,10 @@
                         android:id="@+id/textView3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
                         android:layout_weight="1"
                         android:gravity="center_horizontal|center_vertical"
-                        android:text="Price"
+                        android:text="Price:"
                         android:textColor="#000000"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -131,10 +134,8 @@
                     <EditText
                         android:id="@+id/txt_edit_category"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="32dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
                         android:layout_weight="1"
                         android:background="@drawable/edittext_background"
                         android:drawablePadding="16dp"
@@ -142,16 +143,15 @@
                         android:hint="Book category"
                         android:inputType="textPersonName"
                         android:padding="16dp"
+                        android:textAlignment="center"
                         android:textColorHint="#3D608c"
-                        android:textSize="18dp" />
+                        android:textSize="14sp" />
 
                     <EditText
                         android:id="@+id/txt_edit_price"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="32dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
                         android:layout_weight="1"
                         android:background="@drawable/edittext_background"
                         android:drawablePadding="16dp"
@@ -159,8 +159,9 @@
                         android:hint="Book price"
                         android:inputType="textPersonName"
                         android:padding="16dp"
+                        android:textAlignment="center"
                         android:textColorHint="#3D608c"
-                        android:textSize="18dp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -179,9 +180,10 @@
                         android:id="@+id/txt_NXB"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
                         android:layout_weight="1"
                         android:gravity="center_horizontal|center_vertical"
-                        android:text="Publisher"
+                        android:text="Publisher:"
                         android:textAlignment="center"
                         android:textColor="#000000"
                         android:textStyle="bold" />
@@ -190,9 +192,10 @@
                         android:id="@+id/txt_id"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
                         android:layout_weight="1"
                         android:gravity="center_horizontal|center_vertical"
-                        android:text="ID"
+                        android:text="ID:"
                         android:textColor="#000000"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -205,10 +208,8 @@
                     <EditText
                         android:id="@+id/txt_edit_nxb"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="32dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
                         android:layout_weight="1"
                         android:background="@drawable/edittext_background"
                         android:drawablePadding="16dp"
@@ -216,16 +217,15 @@
                         android:hint="Publisher"
                         android:inputType="textPersonName"
                         android:padding="16dp"
+                        android:textAlignment="center"
                         android:textColorHint="#3D608c"
-                        android:textSize="18dp" />
+                        android:textSize="14sp" />
 
                     <EditText
                         android:id="@+id/txt_edit_ID"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="32dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
                         android:layout_weight="1"
                         android:background="@drawable/edittext_background"
                         android:drawablePadding="16dp"
@@ -233,8 +233,9 @@
                         android:hint="Book id"
                         android:inputType="textPersonName"
                         android:padding="16dp"
+                        android:textAlignment="center"
                         android:textColorHint="#3D608c"
-                        android:textSize="18dp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -253,8 +254,8 @@
                         android:id="@+id/btn_creat3"
                         style="@android:style/Widget.Button"
                         android:layout_width="match_parent"
-                        android:layout_height="65dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
                         android:layout_marginEnd="8dp"
                         android:layout_weight="0.5"
                         android:background="@drawable/btn_background"
@@ -269,9 +270,8 @@
                         android:id="@+id/btn_login_guest3"
                         style="@android:style/Widget.Button"
                         android:layout_width="match_parent"
-                        android:layout_height="65dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
                         android:layout_weight="0.5"
                         android:background="@drawable/btn_background"
                         android:gravity="center_horizontal|center_vertical"
@@ -297,34 +297,47 @@
                 android:layout_weight="0.5"
                 android:orientation="horizontal">
 
-                <ScrollView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical" >
+                        android:layout_height="0dp"
+                        android:layout_weight="0.2"
+                        android:background="@drawable/linenear_layout"
+                        android:orientation="horizontal">
 
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" >
+                        <TextView
+                            android:id="@+id/rfid_code"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="4dp"
+                            android:layout_weight="1.7"
+                            android:text="RFID CODE"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
 
-                            <TextView
-                                android:id="@+id/textView5"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="TextView" />
-
-                            <TextView
-                                android:id="@+id/textView8"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="TextView" />
-                        </TableRow>
+                        <TextView
+                            android:id="@+id/txt_count"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="4dp"
+                            android:layout_weight="0.4"
+                            android:text="COUNT:"
+                            android:textAlignment="inherit"
+                            android:textColor="@color/white" />
 
                     </LinearLayout>
-                </ScrollView>
+
+                    <ListView
+                        android:id="@+id/list_rfid_create"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1.8" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -333,39 +346,31 @@
                 android:layout_weight="0.5"
                 android:orientation="horizontal">
 
-                <TableLayout
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1" >
+                    android:layout_weight="0.5"
+                    android:orientation="vertical">
 
-                    <TableRow
+                    <TextView
+                        android:id="@+id/preview"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" >
+                        android:layout_height="0dp"
+                        android:layout_weight="0.2"
+                        android:background="@drawable/linenear_layout"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:text="PREVIEW"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textStyle="normal|bold" />
 
-                        <TextView
-                            android:id="@+id/textView10"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="TextView" />
-                    </TableRow>
-                </TableLayout>
-
-                <TableLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" >
-
-                    <TableRow
+                    <ListView
+                        android:id="@+id/list_preview"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="0dp"
+                        android:layout_weight="1.8" />
+                </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/textView10"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="TextView" />
-                    </TableRow>
-                </TableLayout>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
