@@ -1,4 +1,4 @@
-package com.example.seminar_manage_showroom_app;
+package com.example.seminar_manage_showroom_app.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+
+import com.example.seminar_manage_showroom_app.R;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView btn_Login;

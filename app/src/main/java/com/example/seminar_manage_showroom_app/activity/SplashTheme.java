@@ -1,4 +1,4 @@
-package com.example.seminar_manage_showroom_app;
+package com.example.seminar_manage_showroom_app.activity;
 
 import android.content.Intent;
 import android.os.Bundle;

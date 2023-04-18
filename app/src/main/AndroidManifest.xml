@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_APN_SETTINGS  " />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE " />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION " />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" /> <!-- SDK_ADD -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission
+        android:name="android.permission.READ_LOGS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+
 
     <application
         android:allowBackup="true"
@@ -12,7 +36,8 @@
         android:theme="@style/Theme.Seminar_Manage_ShowRoom_App"
         tools:targetApi="31">
 
-        <activity android:name=".SplashTheme"
+        <activity
+            android:name=".activity.SplashTheme"
             android:exported="true"
             android:theme="@style/Theme.PlashSrceen">
             <intent-filter>
@@ -21,15 +46,35 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".LoginActivity"
+        <activity
+            android:name=".activity.LoginActivity"
             android:exported="false">
         </activity>
 
-        <activity android:name=".SignUpActivity"
+        <activity
+            android:name=".activity.SignUpActivity"
             android:exported="false">
         </activity>
 
-        <activity android:name=".HomeActivity"
+        <activity
+            android:name=".activity.HomeActivity"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".activity.SettingActivity"
+            android:screenOrientation="sensorLandscape"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".activity.InventoryActivity"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".activity.CreateProductActivity"
+            android:screenOrientation="sensorLandscape"
             android:exported="false">
         </activity>
     </application>
