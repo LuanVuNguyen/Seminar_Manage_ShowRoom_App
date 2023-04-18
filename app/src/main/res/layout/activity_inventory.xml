@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:orientation="vertical">
 
     <LinearLayout
@@ -132,6 +133,7 @@
         android:layout_height="40dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="5dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/btn_menu"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/btn_play" />
@@ -142,27 +144,30 @@
         android:layout_height="40dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="5dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/btn_startscan"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/btn_top" />
 
     <ImageView
-        android:id="@+id/imageView10"
+        android:id="@+id/btn_clear"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="5dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/btn_stopscan"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/btn_clear" />
 
     <ImageView
-        android:id="@+id/imageView11"
+        android:id="@+id/btn_exportcsv"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView10"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/btn_clear"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/btn_exportfile" />
 

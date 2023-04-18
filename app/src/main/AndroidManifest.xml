@@ -77,6 +77,18 @@
             android:screenOrientation="sensorLandscape"
             android:exported="false">
         </activity>
+
+        <activity
+            android:name=".activity.MenuSettingActivity"
+            android:screenOrientation="sensorLandscape"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".activity.MenuConnectionActivity"
+            android:screenOrientation="sensorLandscape"
+            android:exported="false">
+        </activity>
     </application>
 
 </manifest>

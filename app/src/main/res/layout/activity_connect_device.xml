@@ -120,7 +120,7 @@
                             android:layout_height="fill_parent"
                             android:layout_marginLeft="1dp"
                             android:layout_weight="0.08"
-                            android:background="#009900"></FrameLayout>
+                            android:background="@drawable/frame_background"></FrameLayout>
 
                         <FrameLayout
                             android:layout_width="fill_parent"
