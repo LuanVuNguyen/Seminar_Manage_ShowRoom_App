@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item>
+        <shape android:shape="rectangle">
+        </shape>
+    </item>
+    <item android:drawable="@drawable/menu__1_"
+        android:height="40dp"
+        android:width="40dp"/>
+</layer-list>

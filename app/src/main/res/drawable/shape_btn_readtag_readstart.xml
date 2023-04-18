@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 押された場合 -->
+    <item android:state_pressed="true"
+          android:drawable="@drawable/and_btn_start_d"/>
+    <!-- 通常状態 -->
+    <item android:state_enabled="false"
+          android:drawable="@drawable/and_btn_start_u"/> 
+</selector>

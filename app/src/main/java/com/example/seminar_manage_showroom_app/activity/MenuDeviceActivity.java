@@ -481,7 +481,7 @@ public class MenuDeviceActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.menu_deviceconnection:{
-                Intent intent = new Intent(MenuDeviceActivity.this, ConnectDeviceActivity.class);
+                Intent intent = new Intent(MenuDeviceActivity.this, MenuConnectionActivity.class);
                 intent.putExtra(KEY_CONNECTED, mConnectedString);
                 intent.putExtra(KEY_DEVICENAME, mConnectionDevicename);
                 startActivityForResult(intent, CONNECTDEVICE_ACTIVITY);
@@ -499,12 +499,12 @@ public class MenuDeviceActivity extends AppCompatActivity implements View.OnClic
                 return;
             }
 
-            case R.id.menu_barcode:{
-                Constants.CONFIG_SIGNAL_CONECT="1";
-                Intent intent = new Intent(MenuDeviceActivity.this, MenuBussinessActivity.class);
-                startActivity(intent);
-                return;
-            }
+//            case R.id.menu_barcode:{
+//                Constants.CONFIG_SIGNAL_CONECT="1";
+//                Intent intent = new Intent(MenuDeviceActivity.this, MenuBussinessActivity.class);
+//                startActivity(intent);
+//                return;
+//            }
 
         }
     }

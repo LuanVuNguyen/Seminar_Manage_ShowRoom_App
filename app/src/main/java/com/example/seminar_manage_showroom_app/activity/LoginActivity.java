@@ -15,11 +15,10 @@ import com.example.seminar_manage_showroom_app.R;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView btn_Login;
     private Button btn_Signup, btn_Guest;
-    private Context mActivity = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mActivity = this;
         setContentView(R.layout.activity_login);
         Init();
     }

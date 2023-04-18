@@ -26,6 +26,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_weight="0.5"
                     android:orientation="vertical">
 
                     <TextView
@@ -37,6 +38,7 @@
                         android:text="DEVICE"
                         android:textAlignment="center"
                         android:textColor="#000000"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -47,6 +49,7 @@
                         android:gravity="center_horizontal|center_vertical"
                         android:text="FW VER"
                         android:textColor="#000000"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -60,6 +63,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_alignTop="@+id/tv_device_title"
+                        android:layout_margin="15dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="15dp"
                         android:layout_marginBottom="10dp"
@@ -76,6 +80,7 @@
                         android:layout_height="50dp"
                         android:layout_alignLeft="@+id/tv_device"
                         android:layout_alignTop="@+id/tv_fmver_title"
+                        android:layout_margin="15dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="15dp"
