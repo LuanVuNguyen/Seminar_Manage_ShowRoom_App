@@ -35,9 +35,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.libraryapp.R;
-import com.example.libraryapp.common.Constants;
-import com.example.libraryapp.common.interfaces.NotifyForActivityInterface;
+import com.example.seminar_manage_showroom_app.R;
+import com.example.seminar_manage_showroom_app.common.Constants;
+import com.example.seminar_manage_showroom_app.common.interfaces.NotifyForActivityInterface;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -331,7 +331,7 @@ public class MenuDeviceActivity extends AppCompatActivity implements View.OnClic
         readInitSettingFile();
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.mainmenu);
+        setContentView(R.layout.activity_connect_device);
 
         mMenuDeviceActivity = this;
 
@@ -345,6 +345,7 @@ public class MenuDeviceActivity extends AppCompatActivity implements View.OnClic
         }
         mDeviceConnectionBtn = (ImageButton) findViewById(R.id.menu_deviceconnection);
         mDeviceConnectionBtn.setOnClickListener(this);
+
         mSettingBtn = (ImageButton) findViewById(R.id.menu_setting);
         mSettingBtn.setOnClickListener(this);
 
@@ -374,9 +375,6 @@ public class MenuDeviceActivity extends AppCompatActivity implements View.OnClic
         } else {
             mButteryText = new TextView(MenuDeviceActivity.this);
         }
-
-        mBarcodeBtn = (ImageButton) findViewById(R.id.menu_barcode);
-        mBarcodeBtn.setOnClickListener(this);
 
         String connectedAddress = readConnectedAddressFile();
         // 前回接続済み端末があれば

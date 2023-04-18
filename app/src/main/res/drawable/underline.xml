@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!-- 枠線付き長方形 -->
+    <item>
+        <shape android:shape="rectangle">
+            
+            <stroke android:width="0.1dp" android:color="#AAAAAA" />
+        </shape>
+    </item>
+ 
+    
+</layer-list>

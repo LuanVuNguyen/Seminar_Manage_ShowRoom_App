@@ -1,3 +1,4 @@
+
 <resources>
     <!--
     LOGIN ACTIVITY
@@ -42,7 +43,7 @@
     <string name="product_manage">商品管理</string>
     -->
 
-    <string name="app_name">ASB GROUP MANAGERMENT</string>
+    <string name="app_name">ABS GROUP MANAGERMENT</string>
     <string name="device_id">Device ID: </string>
     <string name="app_version">App ver: </string>
     <string name="database_version">DB ver: </string>
@@ -73,10 +74,10 @@
     <string name="btn_report">REPORTS</string>
     <!-- Text setting-->
     <string name="setting">SETTING</string>
-    <string name="mac_address">MAC ADRESS:</string>
-    <string name="power">POWER(0-33):</string>
-    <string name="ip_address">IP ADDRESS:</string>
-    <string name="port">PORT:</string>
+    <string name="mac_address">MAC ADRESS: vd 00:15:39:BB</string>
+    <string name="power">POWER(0-33): VD 33</string>
+    <string name="ip_address">IP ADDRESS: VD 192.168.1.162</string>
+    <string name="port">PORT: VD 8080</string>
     <string name="btn_save">SAVE</string>
     <string name="btn_cancle">CANCLE</string>
     <!-- Text fragmentin-->
@@ -86,6 +87,8 @@
     <string name="whname">WH Name</string>
     <string name="typeincoming">Type Incoming</string>
     <string name="cmt">Comment</string>
+    <!-- Text fragmentout-->
+<!--    <string name="TITLE_FRAGMENT_OUTGOING">New Outgoing</string>-->
     <!-- Text Inventory-->
     <string name="title_inventory">INVENTORY</string>
     <string name="number_inventory">Num</string>
@@ -107,6 +110,7 @@
     <string name="Book_RFID">RFID code</string>
     <string name="Book_author">Author</string>
     <string name="Book_categories">Categories</string>
+<!--    <string name="unlock">ロック解除</string>-->
     <string name="cancel_button">取消</string>
     <string name="title">表示案件を変更します</string>
     <string name="titleyear">発売日	指定</string>

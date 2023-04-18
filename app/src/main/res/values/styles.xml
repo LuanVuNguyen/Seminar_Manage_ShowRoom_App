@@ -22,10 +22,10 @@
     </style>-->
     <style name="SCBSwitch" parent="Theme.AppCompat.Light">
         <!-- active thumb & track color (30% transparency) -->
-        <item name="colorControlActivated">#24435c</item>
+        <item name="colorControlActivated">@color/BlueGray</item>
 
         <!-- inactive thumb color -->
-        <item name="colorSwitchThumbNormal">#24435c
+        <item name="colorSwitchThumbNormal">@color/BlueGray
         </item>
 
         <!-- inactive track color (30% transparency) -->
@@ -49,7 +49,7 @@
         <item name="dialogCornerRadius">16dp</item>
     </style>
     <style name="CustomCheckBox" parent="android:Widget.CompoundButton.CheckBox">
-        <item name="android:button">@drawable/and_btn_check_s  </item>
+        <item name="android:button">@drawable/custom_checkbox</item>
     </style>
     <style name="spinner_style">
         <item name="android:layout_width">match_parent</item>

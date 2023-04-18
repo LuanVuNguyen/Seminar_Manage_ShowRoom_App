@@ -60,29 +60,32 @@
                         android:gravity="bottom|center"
                         android:text="Model switching"
                         android:textAllCaps="true"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp" />
 
                     <RadioGroup
                         android:id="@+id/radioGroupDevice"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:gravity="center">
 
                         <RadioButton
                             android:id="@+id/radioButtonUF2200"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_weight="0.1"
+                            android:layout_weight="0.5"
                             android:text="UF-2200"
-                            android:textColor="#FFFFFF" />
+                            android:textColor="#FFFFFF"
+                            android:textSize="16sp" />
 
                         <RadioButton
                             android:id="@+id/radioButtonUF3000"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_weight="0.1"
+                            android:layout_weight="0.5"
                             android:text="UF-3000"
-                            android:textColor="#FFFFFF" />
+                            android:textColor="#FFFFFF"
+                            android:textSize="16sp" />
 
                     </RadioGroup>
                 </LinearLayout>
