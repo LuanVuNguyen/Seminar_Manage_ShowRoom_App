@@ -106,7 +106,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|center_horizontal"
                             android:layout_margin="8dp"
-                            app:srcCompat="@drawable/circle_green" />
+                            android:background="@drawable/shape_btn_search" />
 
                         <TextView
                             android:id="@+id/txt_btn_search"
@@ -148,7 +148,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|center_horizontal"
                             android:layout_margin="8dp"
-                            app:srcCompat="@drawable/circle_green" />
+                            android:background="@drawable/shape_btn_pay" />
 
                         <TextView
                             android:id="@+id/txt_btn_pay"
@@ -190,7 +190,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|center_horizontal"
                             android:layout_margin="8dp"
-                            app:srcCompat="@drawable/circle_green" />
+                            android:background="@drawable/shape_btn_inv" />
 
                         <TextView
                             android:id="@+id/txt_btn_inventory"
@@ -239,7 +239,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|center_horizontal"
                             android:layout_margin="8dp"
-                            app:srcCompat="@drawable/circle_green" />
+                            android:background="@drawable/shape_btn_search" />
 
                         <TextView
                             android:id="@+id/txt_btn_creatproduct"
@@ -281,14 +281,14 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|center_horizontal"
                             android:layout_margin="8dp"
-                            app:srcCompat="@drawable/circle_green" />
+                            android:background="@drawable/shape_btn_import" />
 
                         <TextView
                             android:id="@+id/txt_btn_import"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|center_horizontal"
-                            android:text="Import"
+                            android:text="Export"
                             android:textAlignment="center"
                             android:textColor="#34346E"
                             android:textStyle="bold" />
@@ -323,14 +323,14 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|center_horizontal"
                             android:layout_margin="8dp"
-                            app:srcCompat="@drawable/circle_green" />
+                            android:background="@drawable/shape_btn_export" />
 
                         <TextView
                             android:id="@+id/txt_btn_export"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|center_horizontal"
-                            android:text="Export"
+                            android:text="Import"
                             android:textAlignment="center"
                             android:textColor="#34346E"
                             android:textStyle="bold" />
@@ -373,7 +373,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|center_horizontal"
                             android:layout_margin="8dp"
-                            app:srcCompat="@drawable/circle_green" />
+                            android:background="@drawable/shape_btn_setting" />
 
                         <TextView
                             android:id="@+id/txt_btn_setting"
@@ -415,7 +415,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|center_horizontal"
                             android:layout_margin="8dp"
-                            app:srcCompat="@drawable/circle_green" />
+                            android:background="@drawable/shape_btn_profile" />
 
                         <TextView
                             android:id="@+id/txt_btn_profile"
@@ -457,7 +457,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|center_horizontal"
                             android:layout_margin="8dp"
-                            app:srcCompat="@drawable/circle_green" />
+                            android:background="@drawable/shape_btn_logout" />
 
                         <TextView
                             android:id="@+id/txt_btn_logout"

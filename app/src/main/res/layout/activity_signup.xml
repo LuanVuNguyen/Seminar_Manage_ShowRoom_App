@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".LoginActivity">
+    tools:context="activity.LoginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -95,30 +95,27 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/btn_login"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/btn_signup"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="32dp"
+                android:background="@drawable/shape_btn_in_bur"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/btn_arraw1" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/btn_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="24dp"
-
-                android:rotationY="180"
+                android:background="@drawable/shape_btn_out_bur"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/btn_arraw1" />
+                app:layout_constraintVertical_bias="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

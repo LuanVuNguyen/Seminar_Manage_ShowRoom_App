@@ -118,7 +118,7 @@ public class ConnectDeviceActivity extends Activity implements View.OnClickListe
         }
         omRadioGroupDevice.setOnCheckedChangeListener(this);
 
-        //getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         // getBluetoothList(ペアリング済み)に成功したら
         if (TecRfidSuite.OPOS_SUCCESS == MenuDeviceActivity.getSDKLibrary().getBluetoothList(mAdressArray)) {

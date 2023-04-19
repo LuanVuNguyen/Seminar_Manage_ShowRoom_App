@@ -889,7 +889,7 @@ public class SettingActivity extends Activity implements View.OnClickListener, N
             mTextMisreadingPreventionSettings.setEnabled(false);
         }
 
-//		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		// リスナーを登録
         MenuDeviceActivity.setListener(this);

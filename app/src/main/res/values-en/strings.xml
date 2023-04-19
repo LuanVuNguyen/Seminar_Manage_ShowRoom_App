@@ -526,7 +526,7 @@
     <string name="message_opensetting_error">Could not open settings file</string>
     <string name="message_readsetting_error">Failed to read settings</string>
     <string name="message_readsetting_out_of_range_error">Failed to load settings. \nSetting value out of range</string>
-    <string name="message_setting_notexist_error">設定ファイルがありません</string>
+    <string name="message_setting_notexist_error">No config file</string>
     <string name="permission_AccessLocation_title">Location permission</string>
     <string name="permission_AccessLocation_use">\nBLE communication is not possible because \"Use location information\" is disabled. \nPlease enable \"Use location information\" in the OS settings. </string>
     <string name="permission_AccessLocation_message">Permission for location information is required for BLE communication. </string>
