@@ -92,7 +92,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
             case R.id.btn_setting:
             {
-                startActivity(new Intent(this, SettingActivity.class));
+                startActivity(new Intent(this, MenuDeviceActivity.class));
                 break;
             }
             case R.id.btn_profile:
