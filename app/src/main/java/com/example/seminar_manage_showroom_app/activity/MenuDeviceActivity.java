@@ -331,7 +331,7 @@ public class MenuDeviceActivity extends AppCompatActivity implements View.OnClic
         readInitSettingFile();
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_connect_device);
+        setContentView(R.layout.mainmenu);
 
         mMenuDeviceActivity = this;
 
@@ -345,7 +345,6 @@ public class MenuDeviceActivity extends AppCompatActivity implements View.OnClic
         }
         mDeviceConnectionBtn = (ImageButton) findViewById(R.id.menu_deviceconnection);
         mDeviceConnectionBtn.setOnClickListener(this);
-
         mSettingBtn = (ImageButton) findViewById(R.id.menu_setting);
         mSettingBtn.setOnClickListener(this);
 
@@ -375,6 +374,9 @@ public class MenuDeviceActivity extends AppCompatActivity implements View.OnClic
         } else {
             mButteryText = new TextView(MenuDeviceActivity.this);
         }
+
+        mBarcodeBtn = (ImageButton) findViewById(R.id.menu_barcode);
+        mBarcodeBtn.setOnClickListener(this);
 
         String connectedAddress = readConnectedAddressFile();
         // 前回接続済み端末があれば
@@ -467,13 +469,19 @@ public class MenuDeviceActivity extends AppCompatActivity implements View.OnClic
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // ConnectDeviceActivityなら
-        if (requestCode == CONNECTDEVICE_ACTIVITY) {
-            mChangeDeviceRadioButton = data.getBooleanExtra(KEY_CHANGEDEVICERADIOBUTTON, false);
-            // resultCodeがOKか確認する
-            if (resultCode == RESULT_OK) {
-                mConnectionRequestString = data.getStringExtra(KEY_CONNECTIONREQUEST);
-                mConnectionDevicename = data.getStringExtra(KEY_DEVICENAME);
+        try {
+            if (requestCode == CONNECTDEVICE_ACTIVITY) {
+                mChangeDeviceRadioButton = data.getBooleanExtra(KEY_CHANGEDEVICERADIOBUTTON, false);
+                // resultCodeがOKか確認する
+                if (resultCode == RESULT_OK) {
+                    mConnectionRequestString = data.getStringExtra(KEY_CONNECTIONREQUEST);
+                    mConnectionDevicename = data.getStringExtra(KEY_DEVICENAME);
+                }
             }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -481,7 +489,7 @@ public class MenuDeviceActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.menu_deviceconnection:{
-                Intent intent = new Intent(MenuDeviceActivity.this, MenuConnectionActivity.class);
+                Intent intent = new Intent(MenuDeviceActivity.this, ConnectDeviceActivity.class);
                 intent.putExtra(KEY_CONNECTED, mConnectedString);
                 intent.putExtra(KEY_DEVICENAME, mConnectionDevicename);
                 startActivityForResult(intent, CONNECTDEVICE_ACTIVITY);
@@ -499,12 +507,12 @@ public class MenuDeviceActivity extends AppCompatActivity implements View.OnClic
                 return;
             }
 
-//            case R.id.menu_barcode:{
-//                Constants.CONFIG_SIGNAL_CONECT="1";
-//                Intent intent = new Intent(MenuDeviceActivity.this, MenuBussinessActivity.class);
-//                startActivity(intent);
-//                return;
-//            }
+            case R.id.menu_barcode:{
+                Constants.CONFIG_SIGNAL_CONECT="1";
+                Intent intent = new Intent(MenuDeviceActivity.this, HomeActivity.class);
+                startActivity(intent);
+                return;
+            }
 
         }
     }

@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#667994"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal" >
+        <TextView
+            android:id="@+id/title_frequency_cycle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:text="frequency-cycle"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/frequency"
+        android:orientation="vertical" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5">
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="9"
+            android:orientation="horizontal" >
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.8"
+                android:layout_height="match_parent">
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+                <TextView
+                    android:id="@+id/frequency1st"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="skip"
+                    android:padding="5dp"
+                    android:background="@drawable/shape_btn_setting_pulldown" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.4" />
+                <TextView
+                    android:id="@+id/frequency2nd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="skip"
+                    android:padding="5dp"
+                    android:background="@drawable/shape_btn_setting_pulldown" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.4" />
+                <TextView
+                    android:id="@+id/frequency3rd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="skip"
+                    android:padding="5dp"
+                    android:background="@drawable/shape_btn_setting_pulldown" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.4" />
+                <TextView
+                    android:id="@+id/frequency4th"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="skip"
+                    android:padding="5dp"
+                    android:background="@drawable/shape_btn_setting_pulldown" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+                <TextView
+                    android:id="@+id/frequency5th"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="skip"
+                    android:padding="5dp"
+                    android:background="@drawable/shape_btn_setting_pulldown" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.4" />
+                <TextView
+                    android:id="@+id/frequency6th"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="skip"
+                    android:padding="5dp"
+                    android:background="@drawable/shape_btn_setting_pulldown" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.4" />
+                <TextView
+                    android:id="@+id/frequency7th"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="skip"
+                    android:padding="5dp"
+                    android:background="@drawable/shape_btn_setting_pulldown" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.4" />
+                <TextView
+                    android:id="@+id/frequency8th"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="skip"
+                    android:padding="5dp"
+                    android:background="@drawable/shape_btn_setting_pulldown" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+                <TextView
+                    android:id="@+id/frequency9th"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="skip"
+                    android:padding="5dp"
+                    android:background="@drawable/shape_btn_setting_pulldown" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.4" />
+                <TextView
+                    android:id="@+id/frequency10th"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="skip"
+                    android:padding="5dp"
+                    android:background="@drawable/shape_btn_setting_pulldown" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.4" />
+                <TextView
+                    android:id="@+id/frequency11th"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="skip"
+                    android:padding="5dp"
+                    android:background="@drawable/shape_btn_setting_pulldown" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.4" />
+                <TextView
+                    android:id="@+id/frequency12th"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="skip"
+                    android:padding="5dp"
+                    android:background="@drawable/shape_btn_setting_pulldown" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="match_parent">
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal" >
+        <CheckBox
+            android:id="@+id/frequency_detail"
+            style="@style/CustomCheckBox"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp" />
+
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_width="0dp"
+            android:layout_weight="9"
+            android:layout_height="wrap_content"
+            android:text="frequency-detail"
+            android:textColor="#ffffff" />
+        <ImageView
+            android:id="@+id/frequency_save"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/setting_filesave"
+            android:src="@drawable/shape_btn_setting_save" />
+    </LinearLayout>
+</LinearLayout>

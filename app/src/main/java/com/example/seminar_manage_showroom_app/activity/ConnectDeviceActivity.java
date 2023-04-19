@@ -1,3 +1,4 @@
+
 package com.example.seminar_manage_showroom_app.activity;
 
 import android.app.Activity;
@@ -18,17 +19,16 @@ import android.widget.RadioGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import com.example.seminar_manage_showroom_app.common.interfaces.NotifyForActivityInterface;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.seminar_manage_showroom_app.R;
+import com.example.seminar_manage_showroom_app.common.interfaces.NotifyForActivityInterface;
 
 import java.util.ArrayList;
 
 import jp.co.toshibatec.TecRfidSuite;
 import jp.co.toshibatec.callback.BluetoothDiscoveryEvent;
 
-public class MenuConnectionActivity extends Activity implements View.OnClickListener, NotifyForActivityInterface, RadioGroup.OnCheckedChangeListener{
+public class ConnectDeviceActivity extends Activity implements View.OnClickListener, NotifyForActivityInterface, RadioGroup.OnCheckedChangeListener{
 
     /** 接続ボタン */
     private ImageView mConnectionBtn;
@@ -57,7 +57,7 @@ public class MenuConnectionActivity extends Activity implements View.OnClickList
     private Handler mShowDialogHandler = new Handler(Looper.getMainLooper());
     /** ダイアログ用ランナブル */
     private Runnable mShowDialogRunnable = null;
-
+    
     /**
      * GetBluetoothList用引数
      */
@@ -83,11 +83,11 @@ public class MenuConnectionActivity extends Activity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu_connect);
-
+        setContentView(R.layout.connectdevice);
+        
         // タイトルバー表記を"デバイス接続"へ変更
         setTitle(R.string.title_connectdevice);
-
+        
         mConnectionBtn = (ImageView) findViewById(R.id.connection);
         mConnectionBtn.setOnClickListener(this);
 
@@ -118,7 +118,7 @@ public class MenuConnectionActivity extends Activity implements View.OnClickList
         }
         omRadioGroupDevice.setOnCheckedChangeListener(this);
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        //getActionBar().setDisplayHomeAsUpEnabled(true);
 
         // getBluetoothList(ペアリング済み)に成功したら
         if (TecRfidSuite.OPOS_SUCCESS == MenuDeviceActivity.getSDKLibrary().getBluetoothList(mAdressArray)) {
@@ -264,7 +264,7 @@ public class MenuConnectionActivity extends Activity implements View.OnClickList
 
     /**
      * startBluetoothDiscoveryで取得したペアリング済みではないデバイスを表示更新
-     *
+     * 
      * @param macAdrress
      */
     private void updateDevicePairingUnprocessedList(String macAdrress) {
@@ -310,7 +310,7 @@ public class MenuConnectionActivity extends Activity implements View.OnClickList
             mShowDialogRunnable = new Runnable() {
                 @Override
                 public void run() {
-                    mDialog = new AlertDialog.Builder(MenuConnectionActivity.this);
+                    mDialog = new AlertDialog.Builder(ConnectDeviceActivity.this);
                     mDialog.setTitle(title);
                     mDialog.setMessage(message);
                     mDialog.setPositiveButton(btn1Txt, new DialogInterface.OnClickListener() {
@@ -338,15 +338,15 @@ public class MenuConnectionActivity extends Activity implements View.OnClickList
         }
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu){
-//
-//        //[更新]ボタン
-//        //Create an option menu from res/menu/version.xml
-//        getMenuInflater().inflate(R.menu.devicelistupdate, menu);
-//
-//        return super.onCreateOptionsMenu(menu);
-//    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+
+        //[更新]ボタン
+        //Create an option menu from res/menu/version.xml
+        getMenuInflater().inflate(R.menu.devicelistupdate, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
