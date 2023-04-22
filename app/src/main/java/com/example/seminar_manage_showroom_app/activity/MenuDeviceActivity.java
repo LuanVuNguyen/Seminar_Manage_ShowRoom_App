@@ -1,5 +1,7 @@
 package com.example.seminar_manage_showroom_app.activity;
 
+import static com.example.seminar_manage_showroom_app.common.Constants.CONFIG_DEVICE_TOSHIBATEC;
+
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
@@ -509,6 +511,7 @@ public class MenuDeviceActivity extends AppCompatActivity implements View.OnClic
 
             case R.id.menu_barcode:{
                 Constants.CONFIG_SIGNAL_CONECT="1";
+                Constants.CONFIG_DEVICE_NAME = Constants.CONFIG_DEVICE_TOSHIBATEC;
                 Intent intent = new Intent(MenuDeviceActivity.this, HomeActivity.class);
                 startActivity(intent);
                 return;

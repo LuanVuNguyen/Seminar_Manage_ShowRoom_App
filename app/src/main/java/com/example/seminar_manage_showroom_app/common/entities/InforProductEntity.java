@@ -16,7 +16,7 @@ public class InforProductEntity {
     private int BasePrice;
     private int TaxIncludePrice;
     private int Quantity;
-
+    private String Category;
 
     private String RfidCode;
     private String TypeProduct;
@@ -119,11 +119,14 @@ public class InforProductEntity {
     public void setRfidCode(String rfidCode) {
         RfidCode = rfidCode;
     }
-    public void setUser(String User){
-        user = User;
+
+    public  void setCategory(String category)
+    {
+        Category = category;
     }
-    public String getUser(){
-        return user;
+
+    public String getCategory(){
+        return Category;
     }
 
     @Override
@@ -141,6 +144,7 @@ public class InforProductEntity {
                 ", TaxIncludePrice=" + TaxIncludePrice +
                 ", Quantity=" + Quantity +
                 ", RfidCode='" + RfidCode + '\'' +
+                ", Category='" + Category + '\'' +
                 '}';
     }
 }

@@ -213,7 +213,7 @@ public class Message {
     public static final String MESSAGE_PASSWORD = "パスワード";
 
     public static final String MESSAGE_CONFIRM_DELETE_RECORD = "このレコードを削除しますか?";
-    public static final String MESSAGE_CONFIRM_DELETE_ALL = " 本当にすべてのデータを削除してもよろしいですか？";
+    public static final String MESSAGE_CONFIRM_DELETE_ALL = " Are you sure you want to delete all data?？";
 
 
     public static final String MESSAGE_CONFIRM_INSERT_DATABASE ="20レコードを超えてスキャンできました。\n データベースに格納して継続します。";
@@ -235,9 +235,9 @@ public class Message {
 
     public static final String MESSAGE_CONFIRM_CHANGE_MODE = "Do you want to change mode?";
     public static final String MESSAGE_CONFIRM_REGISTER_DATA = "未登録データ。 保存しますか？";
-    public static final String MESSAGE_CONFIRM_OVER_DATA = "データ制限が__レコードに達しました。続行するには、このデータを保存する必要があります。";
-    public static final String MESSAGE_CONFIRM_EXPORT_DATA = "データをエクスポートしますか?";
-    public static final String MESSAGE_CONFIRM_REMOVE_ADD_DATA = "エクスポート後にすべてのデータを削除しますか?";
+    public static final String MESSAGE_CONFIRM_OVER_DATA = "Data limit reached __ records. You must save this data to continue.";
+    public static final String MESSAGE_CONFIRM_EXPORT_DATA = "do you want to export the data?";
+    public static final String MESSAGE_CONFIRM_REMOVE_ADD_DATA = "Delete all data after export??";
     public static final String MESSAGE_CONFIRM_SAVE_DATA = "この動作を行う前に現在のスキャンデータを格納してください。\n 登録しますか。";
     public static final String NOT_REGISTER_DATA = "NO";
     public static final String YES_REGISTER_DATA = "YES";

@@ -1,8 +1,7 @@
 package com.example.seminar_manage_showroom_app.common;
 
 public class Config {
-    public static String HTTP_SERVER_SHOP = "http://192.168.1.246:8069";   // Connect API server TONY THINH
-   // private static final String HTTP_SERVER_SHOP = "http://192.168.1.244:8027";   // Connect API server TONY THINH
+    public static String HTTP_SERVER_SHOP = "http://192.168.1.56:8069";
     /**
      * Method POST
      */
