@@ -734,7 +734,6 @@ public class InventoryActivity extends AppCompatActivity implements View.OnClick
     private void loadFragment(Fragment fragment) {
 
         try {
-            System.out.println("loadFragment: ");
             FragmentManager fm = getFragmentManager();
 
             FragmentTransaction fragmentTransaction = fm.beginTransaction();

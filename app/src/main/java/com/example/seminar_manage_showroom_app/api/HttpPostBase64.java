@@ -2,6 +2,7 @@ package com.example.seminar_manage_showroom_app.api;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.example.seminar_manage_showroom_app.common.Config;
 
@@ -45,7 +46,6 @@ public class HttpPostBase64 extends AsyncTask<String, String, String> {
 
         try {
             URL url = new URL(params[1]);
-
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             //httpURLConnection.setConnectTimeout(3000);
             httpURLConnection.setRequestMethod(Config.METHOD_POST);
@@ -55,7 +55,6 @@ public class HttpPostBase64 extends AsyncTask<String, String, String> {
             httpURLConnection.setRequestProperty(Config.PROPERTY_KEY, Config.PROPERTY_VALUE);
 
             JSONObject ob = setParams(params);
-            //System.out.println("Tommm"+ob.toString());
 
             OutputStream os = httpURLConnection.getOutputStream();
             BufferedWriter writer = new BufferedWriter(
@@ -66,14 +65,14 @@ public class HttpPostBase64 extends AsyncTask<String, String, String> {
             os.close();
 
             int responseCode = httpURLConnection.getResponseCode();
-            //System.out.println("tommy3"+responseCode);
+
 
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 BufferedReader in = new BufferedReader(
                         new InputStreamReader(httpURLConnection.getInputStream()));
 
                 String line = in.readLine();
-                System.out.println("tommy2"+line);
+                Log.i("RESPONSE_CSV",line);
                 return (line != null ? line : "");
 
             } else {

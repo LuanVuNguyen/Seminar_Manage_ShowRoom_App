@@ -234,127 +234,35 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:id="@+id/btn_createproduct"
+                            android:id="@+id/btn_profile"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|center_horizontal"
                             android:layout_margin="8dp"
-                            android:background="@drawable/shape_btn_search" />
+                            android:background="@drawable/shape_btn_profile" />
 
                         <TextView
-                            android:id="@+id/txt_btn_creatproduct"
+                            android:id="@+id/txt_btn_profile"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|center_horizontal"
-                            android:text="Create\nProducts"
+                            android:text="Profile"
                             android:textAlignment="center"
                             android:textColor="#34346E"
                             android:textStyle="bold" />
                     </LinearLayout>
 
                     <ImageView
-                        android:id="@+id/icon_settting"
+                        android:id="@+id/icon_profile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="15dp"
-                        app:srcCompat="@drawable/btn_createproducts"
+                        android:layout_marginTop="22dp"
+                        app:srcCompat="@drawable/btn_profile"
 
                         />
 
                 </FrameLayout>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="16dp"
-                    android:background="@drawable/btn_white_background">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/btn_import"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical|center_horizontal"
-                            android:layout_margin="8dp"
-                            android:background="@drawable/shape_btn_import" />
-
-                        <TextView
-                            android:id="@+id/txt_btn_import"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical|center_horizontal"
-                            android:text="Export"
-                            android:textAlignment="center"
-                            android:textColor="#34346E"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <ImageView
-                        android:id="@+id/icon_import"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="15dp"
-                        app:srcCompat="@drawable/btn_import"
-
-                        />
-
-                </FrameLayout>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="16dp"
-                    android:background="@drawable/btn_white_background">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/btn_export"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical|center_horizontal"
-                            android:layout_margin="8dp"
-                            android:background="@drawable/shape_btn_export" />
-
-                        <TextView
-                            android:id="@+id/txt_btn_export"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical|center_horizontal"
-                            android:text="Import"
-                            android:textAlignment="center"
-                            android:textColor="#34346E"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <ImageView
-                        android:id="@+id/icon_export"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginStart="1dp"
-                        android:layout_marginTop="-1dp"
-                        app:srcCompat="@drawable/btn_export"
-
-                        />
-
-                </FrameLayout>
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center">
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -410,35 +318,42 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:id="@+id/btn_profile"
+                            android:id="@+id/btn_createproduct"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|center_horizontal"
                             android:layout_margin="8dp"
-                            android:background="@drawable/shape_btn_profile" />
+                            android:background="@drawable/shape_btn_search" />
 
                         <TextView
-                            android:id="@+id/txt_btn_profile"
+                            android:id="@+id/txt_btn_creatproduct"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|center_horizontal"
-                            android:text="Profile"
+                            android:text="Create\nProducts"
                             android:textAlignment="center"
                             android:textColor="#34346E"
                             android:textStyle="bold" />
                     </LinearLayout>
 
                     <ImageView
-                        android:id="@+id/icon_profile"
+                        android:id="@+id/icon_settting"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="22dp"
-                        app:srcCompat="@drawable/btn_profile"
+                        android:layout_marginTop="15dp"
+                        app:srcCompat="@drawable/btn_createproducts"
 
                         />
 
                 </FrameLayout>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
 
                 <FrameLayout
                     android:layout_width="match_parent"

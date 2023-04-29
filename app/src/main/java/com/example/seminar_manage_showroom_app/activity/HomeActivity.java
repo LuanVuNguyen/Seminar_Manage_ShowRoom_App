@@ -13,8 +13,7 @@ import com.example.seminar_manage_showroom_app.R;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private ImageView btn_search,btn_pay,btn_inventory,btn_creproduct,btn_import,btn_export,btn_setting,btn_profile,btn_logout,avatar;
-
+    private ImageView btn_search,btn_pay,btn_inventory,btn_creproduct,btn_setting,btn_profile,btn_logout,avatar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +39,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         btn_creproduct = (ImageView) findViewById(R.id.btn_createproduct);
         btn_creproduct.setOnClickListener(this);
-
-        btn_import = (ImageView) findViewById(R.id.btn_import);
-        btn_import.setOnClickListener(this);
-
-        btn_export = (ImageView) findViewById(R.id.btn_export);
-        btn_export.setOnClickListener(this);
 
         btn_setting = (ImageView) findViewById(R.id.btn_setting);
         btn_setting.setOnClickListener(this);
@@ -81,14 +74,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             {
                 startActivity(new Intent(this, CreateProductActivity.class));
                 break;
-            }
-            case R.id.btn_import:
-            {
-
-            }
-            case R.id.btn_export:
-            {
-
             }
             case R.id.btn_setting:
             {

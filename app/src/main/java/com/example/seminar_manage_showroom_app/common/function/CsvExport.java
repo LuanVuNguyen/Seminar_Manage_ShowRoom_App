@@ -3,6 +3,7 @@ package com.example.seminar_manage_showroom_app.common.function;
 import android.content.Context;
 import android.os.Build;
 import android.os.Environment;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
@@ -47,7 +48,7 @@ public class CsvExport {
 
         csvData.add(header);
 
-        if(header.length==4){
+        if(header.length==5){
             file_name="/inventory_data";
             for(InforProductEntity p : db.getAllProductsinvbyType("inventory")){
                 String[] row = new String[]{p.getRfidCode(),String.valueOf(p.getBarcodeCD1()), p.getGoodName(), p.getCategory() ,String.valueOf(p.getQuantity())};
@@ -71,9 +72,8 @@ public class CsvExport {
                     break;
             }
         }
-        System.out.println(csvData);
+        Log.i("CSV_data",csvData.toString());
         File directory = new File(sdd.getAbsolutePath()+file_name);
-
         //create directory if not exist
         if (!directory.isDirectory()) {
             boolean rs = directory.mkdirs();
@@ -82,9 +82,9 @@ public class CsvExport {
 
         String csvFile = "/inventory_smartactive_"+sdf.format(new Date(System.currentTimeMillis()))+".csv";
         String fileName = directory+csvFile;
-        System.out.println("tommy"+fileName);
+        Log.i("File_name",fileName);
         File file = new File(fileName);
-        //FileWriter outputfile = new FileWriter(file);
+
         CSVWriter writer = null;
         try {
             writer = new CSVWriter(new FileWriter(file));
@@ -97,7 +97,8 @@ public class CsvExport {
         //endcode Base64
         try {
             String csv_base=encodeCSV(fileName);
-            new HttpPostBase64(context).execute(Config.CODE_LOGIN, Config.HTTP_SERVER_SHOP+Config.API_ODOO_CREATEINVENTORY, csv_base.toString());
+            System.out.println(csv_base);
+            //new HttpPostBase64(context).execute(Config.CODE_LOGIN, Config.HTTP_SERVER_SHOP+Config.API_ODOO_CREATEINVENTORY, csv_base.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
