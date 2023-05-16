@@ -90,6 +90,11 @@
             android:exported="false">
         </activity>
 
+        <activity android:name=".activity.PayActivity"
+            android:screenOrientation="sensorLandscape"
+            android:exported="false">
+        </activity>
+
     </application>
 
 </manifest>

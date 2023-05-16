@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/search_nav"
+    app:startDestination="@id/search_info">
+
+    <fragment
+        android:id="@+id/search_info"
+        android:name="com.example.seminar_manage_showroom_app.search_info"
+        android:label="fragment_search_info"
+        tools:layout="@layout/fragment_search_info" />
+    <fragment
+        android:id="@+id/search_location"
+        android:name="com.example.seminar_manage_showroom_app.search_location"
+        android:label="fragment_search_location"
+        tools:layout="@layout/fragment_search_location" />
+</navigation>
