@@ -95,6 +95,14 @@
             android:exported="false">
         </activity>
 
+        <activity android:name=".activity.SearchActivity"
+            android:exported="false">
+        </activity>
+
+        <activity android:name=".activity.ScanActivity"
+            android:exported="false">
+        </activity>
+
     </application>
 
 </manifest>

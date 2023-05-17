@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/search_info"
-        android:name="com.example.seminar_manage_showroom_app.search_info"
+        android:name="com.example.seminar_manage_showroom_app.activity.search_info"
         android:label="fragment_search_info"
         tools:layout="@layout/fragment_search_info" />
     <fragment
         android:id="@+id/search_location"
-        android:name="com.example.seminar_manage_showroom_app.search_location"
+        android:name="com.example.seminar_manage_showroom_app.activity.search_location"
         android:label="fragment_search_location"
         tools:layout="@layout/fragment_search_location" />
 </navigation>

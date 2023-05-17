@@ -1,4 +1,4 @@
-package com.example.seminar_manage_showroom_app;
+package com.example.seminar_manage_showroom_app.activity;
 
 import android.os.Bundle;
 
@@ -7,6 +7,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.example.seminar_manage_showroom_app.R;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +27,7 @@ public class search_info extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private ImageView btn_start, btn_clear;
 
     public search_info() {
         // Required empty public constructor
@@ -59,6 +64,16 @@ public class search_info extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search_info, container, false);
+        View view =  inflater.inflate(R.layout.fragment_search_info, container, false);
+        btn_start = (ImageView) view.findViewById(R.id.btn_search_info_start);
+        btn_start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Button clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        return view;
     }
+
 }

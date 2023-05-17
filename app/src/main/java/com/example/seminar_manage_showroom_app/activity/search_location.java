@@ -1,19 +1,27 @@
-package com.example.seminar_manage_showroom_app;
+package com.example.seminar_manage_showroom_app.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.example.seminar_manage_showroom_app.R;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link search_location#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class search_location extends Fragment {
+public class search_location extends Fragment implements View.OnClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -23,6 +31,7 @@ public class search_location extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private ImageView btn_continue;
 
     public search_location() {
         // Required empty public constructor
@@ -59,6 +68,21 @@ public class search_location extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search_location, container, false);
+        View view =  inflater.inflate(R.layout.fragment_search_location, container, false);
+        btn_continue = (ImageView) view.findViewById(R.id.btn_search_continue);
+        btn_continue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),ScanActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

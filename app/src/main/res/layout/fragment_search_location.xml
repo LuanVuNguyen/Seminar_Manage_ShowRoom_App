@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".search_location" >
+    tools:context=".activity.search_location">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,12 +24,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:text="book location search "
+                android:text="enter book title to search for RFID information"
                 android:textAlignment="center"
+                android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textSize="20dp"
-                android:textStyle="bold"
-                android:textAllCaps="true" />
+                android:textStyle="bold" />
         </FrameLayout>
 
         <FrameLayout
@@ -38,11 +38,10 @@
             android:layout_weight="0.5">
 
             <EditText
-                android:id="@+id/txt_Login_email2"
+                android:id="@+id/txt_search_bookname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
                 android:layout_marginEnd="32dp"
                 android:background="@drawable/edittext_background_2"
                 android:drawableStart="@drawable/search_icon"
@@ -53,7 +52,7 @@
                 android:padding="16dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"
-                android:textSize="24sp" />
+                android:textSize="20sp" />
         </FrameLayout>
     </LinearLayout>
 
@@ -63,9 +62,56 @@
         android:layout_weight="0.6"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:background="@drawable/cell_shape_title_2"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="No"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:background="@drawable/cell_shape_title_2"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="Book Name"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.6"
+                android:background="@drawable/cell_shape_title_2"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="RFID"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="0dp"
+            android:layout_weight="1.5" />
 
     </LinearLayout>
 
@@ -73,14 +119,16 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"
+        android:background="@drawable/cell_shape_title_2"
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/btn_search_continue"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:src="@drawable/btn_done_pay" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal|center_vertical"
+            android:background="@drawable/shape_btn_continue"
+            android:foregroundGravity="center_vertical|center_horizontal" />
     </LinearLayout>
 
 </LinearLayout>

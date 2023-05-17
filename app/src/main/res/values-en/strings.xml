@@ -98,7 +98,7 @@
     <string name="Quantity_inventory_2">Quantity:</string>
     <string name="Error_inventory">Error:</string>
     <!-- Text IssueBook-->
-    <string name="title_member">Member information</string>
+    <string name="title_member">book information</string>
     <string name="member_name">Name:</string>
     <string name="member_ID">ID:</string>
     <string name="Member_RFID">RFID:</string>

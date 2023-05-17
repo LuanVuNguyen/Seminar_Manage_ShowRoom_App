@@ -59,7 +59,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         {
             case R.id.btn_search:
             {
-
+                startActivity(new Intent(this, SearchActivity.class));
+                break;
             }
             case R.id.btn_pay:
             {
