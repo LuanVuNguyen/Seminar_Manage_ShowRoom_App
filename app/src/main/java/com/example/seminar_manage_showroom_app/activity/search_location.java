@@ -31,7 +31,7 @@ public class search_location extends Fragment implements View.OnClickListener {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private ImageView btn_continue;
+    private Button btn_continue;
 
     public search_location() {
         // Required empty public constructor
@@ -69,7 +69,7 @@ public class search_location extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_search_location, container, false);
-        btn_continue = (ImageView) view.findViewById(R.id.btn_search_continue);
+        btn_continue = (Button) view.findViewById(R.id.button);
         btn_continue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

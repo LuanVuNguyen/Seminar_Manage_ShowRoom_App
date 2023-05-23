@@ -129,7 +129,6 @@ public class InventoryActivity extends AppCompatActivity implements View.OnClick
             });
         }
         else if(Constants.CONFIG_DEVICE_NAME.equals((Constants.CONFIG_DEVICE_TOSHIBATEC))){
-
         }
     }
 
@@ -455,8 +454,7 @@ public class InventoryActivity extends AppCompatActivity implements View.OnClick
             isShowProgress = false;
         }
     }
-    private void setDataEntity(JSONObject obj)
-    {
+    private void setDataEntity(JSONObject obj) {
         String bar1,rfid,name,category;
         int quantity = 0;
         int cost = 0;
@@ -688,30 +686,6 @@ public class InventoryActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    private void showDialog() {
-        PAUSE_DEVICE=1;
-        String message = "" ;
-        for(String i : setRfidNotFound){
-            message+=i+"\r\n";
-        }
-        String title = "▲　RFID Invalid";
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(true);
-        builder.setTitle(title);
-        builder.setMessage(message);
-        builder.setCancelable(false);
-        builder.setPositiveButton("OK",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        PAUSE_DEVICE=0;
-                    }
-                });
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
-
     private void eventClickDeleteAll() {
         //showDialogMessageConfirmExport();
         if (arrDataInList.size() > 0) {
@@ -817,33 +791,6 @@ public class InventoryActivity extends AppCompatActivity implements View.OnClick
             }
         });
         loadFragment(dialogYesNoFragment);
-    }
-    private static LinkedList<InforProductEntity> groupByCustom(LinkedList<InforProductEntity> listInfoProductEntity){
-        Map<String, List<InforProductEntity>> map = new HashMap<String, List<InforProductEntity>>();
-
-        for (InforProductEntity product : listInfoProductEntity) {
-            String key  = product.getBarcodeCD1();
-            if(map.containsKey(key)){
-                List<InforProductEntity> list = map.get(key);
-                list.add(product);
-
-            }else{
-                List<InforProductEntity> list = new ArrayList<InforProductEntity>();
-                list.add(product);
-                map.put(key, list);
-            }
-
-        }
-        System.out.println("luannnn :"+map);
-        LinkedList<InforProductEntity> listReturn = new LinkedList<>();
-        for(Map.Entry<String,List<InforProductEntity>> entry : map.entrySet()){
-            int quantity = entry.getValue().size();
-            InforProductEntity a = entry.getValue().get(0);
-            a.setQuantity(quantity);
-            listReturn.add(a);
-        }
-
-        return listReturn;
     }
     @Override
     public void onClick(View v) {
