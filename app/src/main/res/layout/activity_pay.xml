@@ -35,7 +35,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_weight="0.4"
+                android:layout_weight="0.6"
                 android:background="@drawable/cell_shape_title_3"
                 android:gravity="center"
                 android:text="ID"
@@ -127,7 +127,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="5dp"
-            android:layout_weight="0.5"
+            android:layout_weight="0.3"
             android:padding="5dp">
 
             <LinearLayout
@@ -140,18 +140,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_margin="10dp"
-                    android:layout_weight="0.3">
+                    android:layout_weight="0.2">
 
                     <TextView
-                        android:id="@+id/txt_pay_qty"
+                        android:id="@+id/textview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_margin="10dp"
-                        android:autoText="false"
-                        android:text="QTy:"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
+                        android:text="Billing Information"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
                 </FrameLayout>
 
@@ -160,7 +158,25 @@
                     android:layout_height="0dp"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="10dp"
-                    android:layout_weight="0.3">
+                    android:layout_weight="0.4">
+
+                    <TextView
+                        android:id="@+id/txt_pay_qty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="10dp"
+                        android:text="Qty:"
+                        android:textColor="@color/design_default_color_error"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="0.4">
 
                     <TextView
                         android:id="@+id/txt_pay_total"
@@ -168,45 +184,9 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_margin="10dp"
-                        android:text="Total:"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                </FrameLayout>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_margin="10dp"
-                    android:layout_weight="0.3">
-
-                    <TextView
-                        android:id="@+id/txt_pay_cash"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_margin="10dp"
-                        android:text="Cash:"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                </FrameLayout>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_margin="10dp"
-                    android:layout_weight="0.3">
-
-                    <TextView
-                        android:id="@+id/txt_pay_changecase"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_margin="10dp"
-                        android:text="Change case:"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
+                        android:text="Total"
+                        android:textColor="@color/design_default_color_error"
+                        android:textSize="24sp"
                         android:textStyle="bold" />
                 </FrameLayout>
 
@@ -224,7 +204,25 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.3">
+                android:layout_weight="0.25">
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center"
+                    android:text="Payment methods"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.25">
 
                 <CheckBox
                     android:id="@+id/check_pay_cash"
@@ -242,7 +240,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.3">
+                android:layout_weight="0.25">
 
                 <CheckBox
                     android:id="@+id/check_pay_tranfers"
@@ -260,7 +258,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.3">
+                android:layout_weight="0.25">
 
                 <ImageView
                     android:id="@+id/btn_pay_done"

@@ -1,9 +1,11 @@
 package com.example.seminar_manage_showroom_app.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Insets;
 import android.graphics.Point;
@@ -34,8 +36,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.seminar_manage_showroom_app.R;
+import com.example.seminar_manage_showroom_app.adapter.ListViewAdapterSearch;
 import com.example.seminar_manage_showroom_app.adapter.ListViewScanAdapter;
 import com.example.seminar_manage_showroom_app.api.HttpPostRfid;
+import com.example.seminar_manage_showroom_app.api.HttpRfidResponse;
 import com.example.seminar_manage_showroom_app.common.Config;
 import com.example.seminar_manage_showroom_app.common.Constants;
 import com.example.seminar_manage_showroom_app.common.Message;
@@ -71,7 +75,7 @@ import jp.co.toshibatec.model.TagPack;
  * Use the {@link search_info#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class search_info extends Fragment {
+public class search_info extends Fragment implements HttpRfidResponse {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -87,9 +91,8 @@ public class search_info extends Fragment {
     Set<String> setCustomOutput = new HashSet<>();
     Set<String> setCustomInput = new HashSet<>();
     private int IS_SHOW_DIALOG_LIMIT = 0;
-    CheckBox check_pay_cash, check_pay_tranfers;
     private InforProductEntity inforProductEntity;
-    ListView lv_pay;
+    ListView lv_search;
     private int scan_size;
     private Runnable mDissmissProgressRunnable = null;
     private Handler mDissmissProgressHandler = new Handler(Looper.getMainLooper());
@@ -109,8 +112,13 @@ public class search_info extends Fragment {
     ConnectThreadScan connectThreadScan = null;
     private boolean isReadBackPress = false;
     private LinkedList<InforProductEntity> arrDataInList;
+    private ArrayList<String> mReadData = new ArrayList<String>();
+    private Activity mActivity;
+    private Boolean check_btn = true;
 
-    public search_info() {
+
+    public search_info(Activity activity) {
+        this.mActivity = activity;
         // Required empty public constructor
     }
 
@@ -123,8 +131,8 @@ public class search_info extends Fragment {
      * @return A new instance of fragment search_info.
      */
     // TODO: Rename and change types and number of parameters
-    public static search_info newInstance(String param1, String param2) {
-        search_info fragment = new search_info();
+    public static search_info newInstance(String param1, String param2, Activity mActivity) {
+        search_info fragment = new search_info(mActivity);
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -139,6 +147,24 @@ public class search_info extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        if (Constants.CONFIG_DEVICE_NAME.equals(Constants.CONFIG_DEVICE_ATS100)) {
+            mActivity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        showProgress();
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    initDeviceScanVN();
+                }
+            });
+        }
+        else if(Constants.CONFIG_DEVICE_NAME.equals((Constants.CONFIG_DEVICE_TOSHIBATEC))){
+        }
+
+
     }
 
     @Override
@@ -146,30 +172,48 @@ public class search_info extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_search_info, container, false);
-        btn_start = (ImageView) view.findViewById(R.id.btn_search_info_start);
+        lv_search = (ListView) view.findViewById(R.id.lv_search);
+        btn_start = (ImageView) view.findViewById(R.id.btn_search_startscan);
+        database = new SQLiteDatabaseHandler(mActivity);
+        jsonArraytoshiba=new JSONArray();
+        arrDataInList = new LinkedList<>();
+        inforProductEntity = new InforProductEntity();
+        reloadSQLiteData();
         btn_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Button clicked", Toast.LENGTH_SHORT).show();
+                switch (v.getId())
+                {
+                    case R.id.btn_search_startscan:
+                    {
+                        if (check_btn)
+                        {
+                            startReadtag();
+                        }
+                        else
+                        {
+                            stopReadtag();
+                        }
+                        break;
+                    }
+                }
             }
         });
-
         return view;
     }
 
-
     private void showToast(String s) {
-        runOnUiThread(new Runnable() {
+        mActivity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(search_info.this,s+"",Toast.LENGTH_LONG).show();
+                Toast.makeText(mActivity,s+"",Toast.LENGTH_LONG).show();
             }
         });
     }
+
     private void startReadtag(){
         if (!mIsStartReadTags){
-            btn_start.setImageResource(R.drawable.btn_play_bur);
-            btn_stop.setImageResource(R.drawable.btn_top);
+            btn_start.setImageResource(R.drawable.btn_search_stop);
             showToast("Start scan!!!");
             mIsStartReadTags = true;
             if (TecRfidSuite.OPOS_SUCCESS != mLib.startReadTags(mFilterID, mFiltermask, mStartReadTagsTimeout, mDataEvent, mErrorEvent)){
@@ -179,6 +223,7 @@ public class search_info extends Fragment {
             if (TecRfidSuite.OPOS_SUCCESS != mLib.setDataEventEnabled(true)){
                 Log.i("Set data","True");
             }
+            check_btn = false;
         }
     }
     private ArrayList<String> mShowReadData = new ArrayList<String>();
@@ -220,7 +265,7 @@ public class search_info extends Fragment {
                         Log.i("RFID data: ",""+mReadData.get(i));
                         jsonArraytoshiba.put(mReadData.get(i).toUpperCase());
                         if (jsonArraytoshiba.length() != 0) {
-                            new HttpPostRfid(CreateProductActivity.this).execute(Config.CODE_LOGIN,Config.HTTP_SERVER_SHOP+Config.API_ODOO_GETMULTIPLEPRODUCT, jsonArraytoshiba.toString());
+                            new HttpPostRfid(mActivity).execute(Config.CODE_LOGIN,Config.HTTP_SERVER_SHOP+Config.API_ODOO_GETMULTIPLEPRODUCT, jsonArraytoshiba.toString());
                         }
                         a.add(mReadData.get(i));
                         if (a.size() >= 50) {
@@ -250,8 +295,7 @@ public class search_info extends Fragment {
             return null;
         }
     }
-    private ArrayList<String> mReadData = new ArrayList<String>();
-    private CreateProductActivity.UpdateReadTagDataTask mUpdateReadTagDataTask = null;
+    private search_info.UpdateReadTagDataTask mUpdateReadTagDataTask = null;
     private DataEventHandler mDataEvent = new DataEventHandler() {
         @Override
         public void onEvent(HashMap<String, TagPack> tagList) {
@@ -260,7 +304,8 @@ public class search_info extends Fragment {
                 mReadData.add(key);
             }
             if(Build.VERSION.SDK_INT < Build.VERSION_CODES.R){
-                mUpdateReadTagDataTask = new CreateProductActivity.UpdateReadTagDataTask();
+
+                mUpdateReadTagDataTask = new search_info.UpdateReadTagDataTask();
                 mUpdateReadTagDataTask.execute("");
             }
 
@@ -280,13 +325,13 @@ public class search_info extends Fragment {
     private void stopReadtag() {
         if (mIsStartReadTags)
         {
-            btn_start.setImageResource(R.drawable.btn_play);
-            btn_stop.setImageResource(R.drawable.btn_top_bur);
+            btn_start.setImageResource(R.drawable.btn_search_start);
             showToast("Stop scan!!!");
             if (TecRfidSuite.OPOS_SUCCESS == mLib.stopReadTags(mStopReadTagsResultCallback)) {
                 Date currentTime = Calendar.getInstance().getTime();
                 Log.i("Stop scan"," " + currentTime);
             }
+            check_btn = true;
         }
     }
     private ResultCallback mStopReadTagsResultCallback = new ResultCallback() {
@@ -300,7 +345,7 @@ public class search_info extends Fragment {
             // buttonValid();
             if(isReadBackPress){
                 isReadBackPress = false;
-                finish();
+                mActivity.finish();
             }
         }
     };
@@ -311,31 +356,31 @@ public class search_info extends Fragment {
     }
     protected void showProgress() {
         if (mProgressBar == null) {
-            mProgressBar = new ProgressBar(this, null, android.R.attr.progressBarStyleLarge);
+            mProgressBar = new ProgressBar(mActivity, null, android.R.attr.progressBarStyleLarge);
             //スクリーンサイズを取得する
             int width;
             int height;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                WindowMetrics display = this.getWindowManager().getCurrentWindowMetrics();
+                WindowMetrics display = mActivity.getWindowManager().getCurrentWindowMetrics();
                 // 画面サイズ取得
                 Insets insets = display.getWindowInsets().getInsetsIgnoringVisibility(WindowInsets.Type.navigationBars() | WindowInsets.Type.displayCutout());
                 width = display.getBounds().width() - (insets.right + insets.left);
                 height = display.getBounds().height() - (insets.top + insets.bottom);
             } else {
-                Display display = this.getWindowManager().getDefaultDisplay();
+                Display display = mActivity.getWindowManager().getDefaultDisplay();
                 Point point = new Point();
                 display.getSize(point);
                 width = point.x;
                 height = point.y;
             }
 
-            ViewGroup rootView = (ViewGroup) getWindow().getDecorView();
+            ViewGroup rootView = (ViewGroup) mActivity.getWindow().getDecorView();
             ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             mProgressBar.setPadding(width * 3 / 8, height * 3 / 8, width * 3 / 8, height * 3 / 8);
             rootView.addView(mProgressBar, params);
 
         }
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+        mActivity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         mProgressBar.setVisibility(ProgressBar.VISIBLE);
         isShowProgress = true;
@@ -346,7 +391,7 @@ public class search_info extends Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                connectThreadScan.connect(bluetoothDeviceConnected2(), CreateProductActivity.this, new Callable() {
+                connectThreadScan.connect(bluetoothDeviceConnected2(), mActivity, new Callable() {
                     @Override
                     public void call(boolean result) {
                         showToast("starting…");
@@ -389,7 +434,7 @@ public class search_info extends Fragment {
         mDissmissProgressRunnable = new Runnable() {
             @Override
             public void run() {
-                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                mActivity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
@@ -480,7 +525,7 @@ public class search_info extends Fragment {
             //STOP DEVICE SCAN
             IS_SHOW_DIALOG_LIMIT=1;
             //Show message confirm
-            AlertDialog.Builder alertDialog = new AlertDialog.Builder(CreateProductActivity.this);
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(mActivity);
             alertDialog.setMessage(String.format(Message.MESSAGE_CONFIRM_OVER_DATA, Constants.LIMIT_ONCE));
 
             alertDialog.setCancelable(false);
@@ -524,7 +569,7 @@ public class search_info extends Fragment {
         }
     }
     private void showProgressRunUi(){
-        runOnUiThread(new Runnable() {
+        mActivity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 showProgress();
@@ -541,17 +586,17 @@ public class search_info extends Fragment {
         super.onDestroy();
     }
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
     }
     private void restartListView() {
-        runOnUiThread(new Runnable() {
+        mActivity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 // Update list view
-                ListViewScanAdapter adapterBook = new ListViewScanAdapter(CreateProductActivity.this,
+                ListViewAdapterSearch adapterBook = new ListViewAdapterSearch(mActivity,
                         arrDataInList);
-                lv_pay.setAdapter(adapterBook);
+                lv_search.setAdapter(adapterBook);
                 // Show total number and price
                 callTotalNumberAndPrice();
 
@@ -578,7 +623,7 @@ public class search_info extends Fragment {
     private void initListViewScreen() {
 
         // check array null
-        arrDataInList = (LinkedList<InforProductEntity>) getLastCustomNonConfigurationInstance();
+        //arrDataInList = (LinkedList<InforProductEntity>) mActivity.getLastCustomNonConfigurationInstance();
 
         if (arrDataInList == null) {
             arrDataInList = new LinkedList<>();
@@ -603,7 +648,6 @@ public class search_info extends Fragment {
         }
 
     }
-
     List<HttpPostRfid> listHttp = new ArrayList<>();
     @Override
     public void progressRfidFinish(String output, int typeRequestApi, String fileName) {
@@ -660,7 +704,7 @@ public class search_info extends Fragment {
                     }
                 }
             } else {
-                SupModRfidCommon.showNotifyErrorDialog(search_info.this).show();
+                SupModRfidCommon.showNotifyErrorDialog(mActivity).show();
             }
         } catch (JSONException e) {
             e.printStackTrace();

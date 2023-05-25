@@ -13,6 +13,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.seminar_manage_showroom_app.R;
+import com.example.seminar_manage_showroom_app.api.HttpRfidResponse;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
@@ -28,7 +29,7 @@ public class SearchActivity extends AppCompatActivity implements BottomNavigatio
 
         // Set the default selected fragment
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragmentContainerView, new search_info())
+                .replace(R.id.fragmentContainerView, new search_info(this))
                 .commit();
     }
 
@@ -37,7 +38,7 @@ public class SearchActivity extends AppCompatActivity implements BottomNavigatio
         Fragment selectedFragment = null;
         switch (item.getItemId()) {
             case R.id.search_info:
-                selectedFragment = new search_info();
+                selectedFragment = new search_info(this);
                 break;
             case R.id.search_location:
                 selectedFragment = new search_location();
@@ -51,4 +52,5 @@ public class SearchActivity extends AppCompatActivity implements BottomNavigatio
         }
         return false;
     }
+
 }

@@ -14,20 +14,14 @@ import com.example.seminar_manage_showroom_app.common.entities.InforProductEntit
 
 import java.util.LinkedList;
 
-/**
- * List View Adapter for Register Data Screen
- *
- * @author Tai-LQ
- * @since 2019/06/10
- */
-public class ListViewScanAdapter extends BaseAdapter implements Filterable{
+public class ListViewAdapterPay extends BaseAdapter implements Filterable {
 
     private LinkedList<InforProductEntity> list;
     private LinkedList<InforProductEntity> listOld;
     private Activity activity;
     private int sizeList;
 
-    public ListViewScanAdapter(Activity activity, LinkedList<InforProductEntity> list) {
+    public ListViewAdapterPay(Activity activity, LinkedList<InforProductEntity> list) {
 
         super();
         this.activity = activity;
@@ -85,31 +79,31 @@ public class ListViewScanAdapter extends BaseAdapter implements Filterable{
     @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
 
-        final ViewHolder viewHolder;
+        final ListViewAdapterPay.ViewHolder viewHolder;
         LayoutInflater inflater = activity.getLayoutInflater();
         if (convertView == null) {
             // Init custom layout list scan
-            convertView = inflater.inflate(R.layout.adapter_list_scan1, null);
-            viewHolder = new ViewHolder();
+            convertView = inflater.inflate(R.layout.adapter_listscan_pay, null);
+            viewHolder = new ListViewAdapterPay.ViewHolder();
 
             // Init column list view
-            viewHolder.lv_title_column1 = (TextView) convertView.findViewById(R.id.txt_no);
-            viewHolder.lv_title_column2 = (TextView) convertView.findViewById(R.id.txt_id_inv);
-            viewHolder.lv_title_column3 = (TextView) convertView.findViewById(R.id.txt_book_name);
-            viewHolder.lv_title_column4 = (TextView) convertView.findViewById(R.id.txt_category_inv);
-            viewHolder.lv_title_column5 = (TextView) convertView.findViewById(R.id.txt_quanlity_inv);
+            viewHolder.lv_title_column1 = (TextView) convertView.findViewById(R.id.txt_pay_no);
+            viewHolder.lv_title_column2 = (TextView) convertView.findViewById(R.id.txt_pay_id);
+            viewHolder.lv_title_column3 = (TextView) convertView.findViewById(R.id.txt_pay_bookname);
+            viewHolder.lv_title_column4 = (TextView) convertView.findViewById(R.id.txt_pay_price);
+//            viewHolder.lv_title_column5 = (TextView) convertView.findViewById(R.id.txt_quanlity_inv);
             convertView.setTag(viewHolder);
         } else {
-            viewHolder = (ViewHolder) convertView.getTag();
+            viewHolder = (ListViewAdapterPay.ViewHolder) convertView.getTag();
         }
 
         // Set data in list to list view
         InforProductEntity item = list.get(position);
         viewHolder.lv_title_column1.setText(String.valueOf(position+1));
-        viewHolder.lv_title_column4.setText(item.getGoodName());
-        viewHolder.lv_title_column3.setText(item.getBarcodeCD1());
-        viewHolder.lv_title_column5.setText(String.valueOf(item.getQuantity()));
-        viewHolder.lv_title_column2.setText(String.valueOf(item.getCategory()));
+        viewHolder.lv_title_column3.setText(item.getGoodName());
+        viewHolder.lv_title_column2.setText(item.getBarcodeCD1());
+//        viewHolder.lv_title_column5.setText(String.valueOf(item.getQuantity()));
+        viewHolder.lv_title_column4.setText(String.valueOf(item.getBasePrice()));
         return convertView;
     }
     @Override
@@ -153,3 +147,4 @@ public class ListViewScanAdapter extends BaseAdapter implements Filterable{
     }
 
 }
+

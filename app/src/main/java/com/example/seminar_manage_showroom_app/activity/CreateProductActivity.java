@@ -4,7 +4,10 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Insets;
 import android.graphics.Point;
 import android.media.AudioManager;
@@ -23,6 +26,8 @@ import android.view.ViewGroup;
 import android.view.WindowInsets;
 import android.view.WindowManager;
 import android.view.WindowMetrics;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -79,9 +84,8 @@ public class CreateProductActivity extends AppCompatActivity implements HttpRfid
     Set<String> setCustomOutput = new HashSet<>();
     Set<String> setCustomInput = new HashSet<>();
     private int IS_SHOW_DIALOG_LIMIT = 0;
-    CheckBox check_pay_cash, check_pay_tranfers;
     private InforProductEntity inforProductEntity;
-    ListView lv_pay;
+
     private int scan_size;
     private Runnable mDissmissProgressRunnable = null;
     private Handler mDissmissProgressHandler = new Handler(Looper.getMainLooper());
@@ -101,6 +105,12 @@ public class CreateProductActivity extends AppCompatActivity implements HttpRfid
     ConnectThreadScan connectThreadScan = null;
     private boolean isReadBackPress = false;
     private LinkedList<InforProductEntity> arrDataInList;
+    ArrayAdapter adapter;
+    private ArrayList<String> dataList;
+    Set<String> setRfidNotFound = new HashSet<>();
+
+
+    /*--------------------------------------------------------------------*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,12 +129,14 @@ public class CreateProductActivity extends AppCompatActivity implements HttpRfid
                     initDeviceScanVN();
                 }
             });
+            btn_start.setVisibility(View.GONE);
+            btn_stop.setVisibility(View.GONE);
         }
         else if(Constants.CONFIG_DEVICE_NAME.equals((Constants.CONFIG_DEVICE_TOSHIBATEC))){
         }
     }
     private void init(){
-        btn_creat = (ImageView) findViewById(R.id.btn_creat);
+        btn_creat = (ImageView) findViewById(R.id.btn_create);
         btn_creat.setOnClickListener(this);
 
         btn_preview = (ImageView) findViewById(R.id.btn_preview);
@@ -149,6 +161,14 @@ public class CreateProductActivity extends AppCompatActivity implements HttpRfid
 
         lv_pre = (ListView) findViewById(R.id.list_preview);
         lv_rfid = (ListView) findViewById(R.id.list_rfid_create);
+        jsonArraytoshiba=new JSONArray();
+        arrDataInList = new LinkedList<>();
+        inforProductEntity = new InforProductEntity();
+        reloadSQLiteData();
+
+        dataList = new ArrayList<>();
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, dataList);
+        lv_rfid.setAdapter(adapter);
     }
 
     @Override
@@ -175,8 +195,6 @@ public class CreateProductActivity extends AppCompatActivity implements HttpRfid
         }
 
     }
-
-
 
     private void showToast(String s) {
         runOnUiThread(new Runnable() {
@@ -571,7 +589,7 @@ public class CreateProductActivity extends AppCompatActivity implements HttpRfid
                 // Update list view
                 ListViewScanAdapter adapterBook = new ListViewScanAdapter(CreateProductActivity.this,
                         arrDataInList);
-                lv_pay.setAdapter(adapterBook);
+                lv_rfid.setAdapter(adapterBook);
                 // Show total number and price
                 callTotalNumberAndPrice();
 
@@ -641,49 +659,60 @@ public class CreateProductActivity extends AppCompatActivity implements HttpRfid
 
                     JSONArray jArray = jsonObject.getJSONArray(Constants.KEY_DATA);
 
-                    Log.d("Response",""+jArray);
-
                     JSONArray jArray1 = jArray.getJSONArray(0);
-
-                    Log.d("Response head",""+jArray1);
 
                     for (int j = 0; j < jArray1.length() ; j++)
                     {
-
                         JSONObject obj2 = jArray1.getJSONObject(j);
 
-                        Log.d("obj2",""+obj2);
-
                         String stringRfid= obj2.getString(Constants.KEY_RFID);
-
-                        Log.d("stringRfid",""+stringRfid);
 
                         if(setCustomOutput.add(stringRfid))
                         {
                             try{
-                                setDataEntity(obj2);
+                                //setDataEntity(obj2);
                             }
                             catch (Exception e)
                             {
                                 Log.e("save database faile",e.getMessage());
                             }
-
                         }
                         JSONArray err = jArray.getJSONArray(1);
                         if (err != null) {
                             for (int i = 0; i < err.length(); i++) {
-                                //setRfidNotFound.add(err.get(i).toString());
+                                updateListView(err.get(i).toString());
+                                setRfidNotFound.add(err.get(i).toString());
                             }
 
-                            //total_error.setText(MessageFormat.format("{0} : {1}", getText(R.string.total_error), setRfidNotFound.size()+""));
+                            txt_count.setText(MessageFormat.format("{0} : {1}", getText(R.string.count), setRfidNotFound.size()+""));
                         }
                     }
                 }
-            } else {
+            }
+            else {
                 SupModRfidCommon.showNotifyErrorDialog(CreateProductActivity.this).show();
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
+
+    public void updateListView(String newValue) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                // Thêm giá trị mới vào danh sách
+                if (!dataList.contains(newValue)) {
+                    dataList.add(newValue);
+                    Intent intent = new Intent("com.example.NEW_DATA_ACTION");
+                    intent.putExtra("newData", newValue);
+                    sendBroadcast(intent);
+
+                    // Cập nhật lại adapter
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
+    }
+
 }

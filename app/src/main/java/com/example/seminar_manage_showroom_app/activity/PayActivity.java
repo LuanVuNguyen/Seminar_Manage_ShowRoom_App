@@ -1,18 +1,12 @@
 package com.example.seminar_manage_showroom_app.activity;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.DialogInterface;
-import android.content.pm.PackageManager;
 import android.graphics.Insets;
 import android.graphics.Point;
-import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.os.AsyncTask;
@@ -38,8 +32,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.seminar_manage_showroom_app.R;
-import com.example.seminar_manage_showroom_app.adapter.DialogYesNoFragment;
-import com.example.seminar_manage_showroom_app.adapter.ListViewScanAdapter;
+import com.example.seminar_manage_showroom_app.adapter.ListViewAdapterPay;
 import com.example.seminar_manage_showroom_app.api.HttpPostRfid;
 import com.example.seminar_manage_showroom_app.api.HttpRfidResponse;
 import com.example.seminar_manage_showroom_app.common.Config;
@@ -131,8 +124,7 @@ public class PayActivity extends AppCompatActivity implements HttpRfidResponse, 
     private void init() {
         txt_qty = findViewById(R.id.txt_pay_qty);
         txt_total = findViewById(R.id.txt_pay_total);
-        txt_cash = findViewById(R.id.txt_pay_cash);
-        txt_change_cash = findViewById(R.id.txt_pay_changecase);
+
 
         btn_done_pay = (ImageView) findViewById(R.id.btn_pay_done);
         btn_done_pay.setOnClickListener(this);
@@ -441,6 +433,8 @@ public class PayActivity extends AppCompatActivity implements HttpRfidResponse, 
         int quantity = 0;
         int cost = 0;
         int tax = 0;
+        int price;
+
         try
         {
             bar1 = obj.getString(Constants.KEY_JANCODE_1);
@@ -448,6 +442,7 @@ public class PayActivity extends AppCompatActivity implements HttpRfidResponse, 
             name = obj.getString(Constants.KEY_GOOD_NAME);
             rfid = obj.getString(Constants.KEY_RFID);
             category = obj.getString("Product Category");
+            price = obj.getInt("Price");
             inforProductEntity.setBarcodeCD1(bar1);
             inforProductEntity.setBasePrice(cost);
             inforProductEntity.setTypeProduct(Constants.TYPE_TABLE_INVENTORY);
@@ -456,6 +451,7 @@ public class PayActivity extends AppCompatActivity implements HttpRfidResponse, 
             inforProductEntity.setGoodName(name);
             inforProductEntity.setRfidCode(rfid);
             inforProductEntity.setCategory(category);
+            inforProductEntity.setBasePrice(price);
             processBarcode(bar1,cost);
         }
         catch (JSONException e)
@@ -581,7 +577,7 @@ public class PayActivity extends AppCompatActivity implements HttpRfidResponse, 
             @Override
             public void run() {
                 // Update list view
-                ListViewScanAdapter adapterBook = new ListViewScanAdapter(PayActivity.this,
+                ListViewAdapterPay adapterBook = new ListViewAdapterPay(PayActivity.this,
                         arrDataInList);
                 lv_pay.setAdapter(adapterBook);
                 // Show total number and price
@@ -596,11 +592,13 @@ public class PayActivity extends AppCompatActivity implements HttpRfidResponse, 
     private void callTotalNumberAndPrice() {
 
         int intQuantity = 0;
+        int intPrice = 0 ;
         for (int i = 0; i < arrDataInList.size(); i++) {
             intQuantity += arrDataInList.get(i).getQuantity();
+            intPrice += arrDataInList.get(i).getBasePrice();
         }
         txt_qty.setText(MessageFormat.format("{0} : {1}", String.valueOf(getText(R.string.total_quantity)), intQuantity));
-
+        txt_total.setText(MessageFormat.format("{0} : {1}", String.valueOf(getText(R.string.total_price)), intPrice));
     }
     private void updateCurrentView() {
         arrDataInList.add(0, inforProductEntity);
