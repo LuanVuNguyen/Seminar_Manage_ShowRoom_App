@@ -3,14 +3,10 @@ package com.example.seminar_manage_showroom_app.activity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
 
 import com.example.seminar_manage_showroom_app.R;
 import com.example.seminar_manage_showroom_app.api.HttpRfidResponse;
@@ -52,5 +48,4 @@ public class SearchActivity extends AppCompatActivity implements BottomNavigatio
         }
         return false;
     }
-
 }

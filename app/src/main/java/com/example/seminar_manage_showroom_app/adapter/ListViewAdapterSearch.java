@@ -79,7 +79,7 @@ public class ListViewAdapterSearch extends BaseAdapter implements Filterable {
         LayoutInflater inflater = activity.getLayoutInflater();
         if (convertView == null) {
             // Init custom layout list scan
-            convertView = inflater.inflate(R.layout.adapter_listscan_pay, null);
+            convertView = inflater.inflate(R.layout.adapter_listscan_search, null);
             viewHolder = new ListViewAdapterSearch.ViewHolder();
 
             // Init column list view

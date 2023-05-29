@@ -7,6 +7,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Insets;
 import android.graphics.Point;
 import android.media.AudioManager;
@@ -15,6 +16,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
@@ -28,7 +30,9 @@ import android.view.ViewGroup;
 import android.view.WindowInsets;
 import android.view.WindowManager;
 import android.view.WindowMetrics;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -39,7 +43,9 @@ import com.example.seminar_manage_showroom_app.R;
 import com.example.seminar_manage_showroom_app.adapter.ListViewAdapterSearch;
 import com.example.seminar_manage_showroom_app.adapter.ListViewScanAdapter;
 import com.example.seminar_manage_showroom_app.api.HttpPostRfid;
+import com.example.seminar_manage_showroom_app.api.HttpPostRfidSearch;
 import com.example.seminar_manage_showroom_app.api.HttpRfidResponse;
+import com.example.seminar_manage_showroom_app.api.HttpRfidResponseSearch;
 import com.example.seminar_manage_showroom_app.common.Config;
 import com.example.seminar_manage_showroom_app.common.Constants;
 import com.example.seminar_manage_showroom_app.common.Message;
@@ -47,6 +53,7 @@ import com.example.seminar_manage_showroom_app.common.entities.InforProductEntit
 import com.example.seminar_manage_showroom_app.common.function.SupModRfidCommon;
 import com.example.seminar_manage_showroom_app.common.interfaces.Callable;
 import com.example.seminar_manage_showroom_app.connect.ConnectThreadScan;
+import com.example.seminar_manage_showroom_app.connect.ConnectThreadSearch;
 import com.example.seminar_manage_showroom_app.database.SQLiteDatabaseHandler;
 
 import org.json.JSONArray;
@@ -75,7 +82,7 @@ import jp.co.toshibatec.model.TagPack;
  * Use the {@link search_info#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class search_info extends Fragment implements HttpRfidResponse {
+public class search_info extends Fragment  implements HttpRfidResponseSearch {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -85,15 +92,11 @@ public class search_info extends Fragment implements HttpRfidResponse {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private ImageView btn_start, btn_clear;
-    SQLiteDatabaseHandler database;
-    TextView txt_qty, txt_total, txt_cash, txt_change_cash;
+
+    private static Activity mActivity;
+
     Set<String> setCustomOutput = new HashSet<>();
-    Set<String> setCustomInput = new HashSet<>();
-    private int IS_SHOW_DIALOG_LIMIT = 0;
-    private InforProductEntity inforProductEntity;
-    ListView lv_search;
-    private int scan_size;
+
     private Runnable mDissmissProgressRunnable = null;
     private Handler mDissmissProgressHandler = new Handler(Looper.getMainLooper());
     ToneGenerator toneG;
@@ -109,18 +112,18 @@ public class search_info extends Fragment implements HttpRfidResponse {
     private static final int TAGDATAFULLBUFFERERROR = 65;
     private ProgressBar mProgressBar = null;
     private boolean isShowProgress = false;
-    ConnectThreadScan connectThreadScan = null;
+    ConnectThreadSearch connectThreadScan = null;
     private boolean isReadBackPress = false;
-    private LinkedList<InforProductEntity> arrDataInList;
-    private ArrayList<String> mReadData = new ArrayList<String>();
-    private Activity mActivity;
-    private Boolean check_btn = true;
-
+    Set<String> setRfidNotFound = new HashSet<>();
+    TextView txt_name, txt_id, txt_rfid, txt_author, txt_cate, txt_des;
+    /*------------------------------------------------------------*/
 
     public search_info(Activity activity) {
         this.mActivity = activity;
         // Required empty public constructor
     }
+
+
 
     /**
      * Use this factory method to create a new instance of
@@ -131,8 +134,8 @@ public class search_info extends Fragment implements HttpRfidResponse {
      * @return A new instance of fragment search_info.
      */
     // TODO: Rename and change types and number of parameters
-    public static search_info newInstance(String param1, String param2, Activity mActivity) {
-        search_info fragment = new search_info(mActivity);
+    public static search_info newInstance(String param1, String param2) {
+        search_info fragment = new search_info(new Activity());
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -147,6 +150,7 @@ public class search_info extends Fragment implements HttpRfidResponse {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        jsonArraytoshiba = new JSONArray();
         if (Constants.CONFIG_DEVICE_NAME.equals(Constants.CONFIG_DEVICE_ATS100)) {
             mActivity.runOnUiThread(new Runnable() {
                 @Override
@@ -162,9 +166,8 @@ public class search_info extends Fragment implements HttpRfidResponse {
             });
         }
         else if(Constants.CONFIG_DEVICE_NAME.equals((Constants.CONFIG_DEVICE_TOSHIBATEC))){
+            startReadtag();
         }
-
-
     }
 
     @Override
@@ -172,34 +175,27 @@ public class search_info extends Fragment implements HttpRfidResponse {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_search_info, container, false);
-        lv_search = (ListView) view.findViewById(R.id.lv_search);
-        btn_start = (ImageView) view.findViewById(R.id.btn_search_startscan);
-        database = new SQLiteDatabaseHandler(mActivity);
-        jsonArraytoshiba=new JSONArray();
-        arrDataInList = new LinkedList<>();
-        inforProductEntity = new InforProductEntity();
-        reloadSQLiteData();
-        btn_start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switch (v.getId())
-                {
-                    case R.id.btn_search_startscan:
-                    {
-                        if (check_btn)
-                        {
-                            startReadtag();
-                        }
-                        else
-                        {
-                            stopReadtag();
-                        }
-                        break;
-                    }
-                }
-            }
-        });
+        txt_name = (TextView) view.findViewById(R.id.txt_info_bookname);
+        txt_id = (TextView) view.findViewById(R.id.txt_info_bookname);
+        txt_rfid = (TextView) view.findViewById(R.id.txt_info_bookname);
+        txt_author = (TextView) view.findViewById(R.id.txt_info_bookname);
+        txt_cate =  (TextView) view.findViewById(R.id.txt_info_bookname);
+        txt_des = (TextView) view.findViewById(R.id.txt_info_bookname);
         return view;
+    }
+
+    private void startReadtag(){
+        if (!mIsStartReadTags){
+            showToast("Start scan!!!");
+            mIsStartReadTags = true;
+            if (TecRfidSuite.OPOS_SUCCESS != mLib.startReadTags(mFilterID, mFiltermask, mStartReadTagsTimeout, mDataEvent, mErrorEvent)){
+                Date currentTime = Calendar.getInstance().getTime();
+                Log.i("Start scan","" + currentTime);
+            }
+            if (TecRfidSuite.OPOS_SUCCESS != mLib.setDataEventEnabled(true)){
+                Log.i("Set data","True");
+            }
+        }
     }
 
     private void showToast(String s) {
@@ -211,21 +207,6 @@ public class search_info extends Fragment implements HttpRfidResponse {
         });
     }
 
-    private void startReadtag(){
-        if (!mIsStartReadTags){
-            btn_start.setImageResource(R.drawable.btn_search_stop);
-            showToast("Start scan!!!");
-            mIsStartReadTags = true;
-            if (TecRfidSuite.OPOS_SUCCESS != mLib.startReadTags(mFilterID, mFiltermask, mStartReadTagsTimeout, mDataEvent, mErrorEvent)){
-                Date currentTime = Calendar.getInstance().getTime();
-                Log.i("Start scan","" + currentTime);
-            }
-            if (TecRfidSuite.OPOS_SUCCESS != mLib.setDataEventEnabled(true)){
-                Log.i("Set data","True");
-            }
-            check_btn = false;
-        }
-    }
     private ArrayList<String> mShowReadData = new ArrayList<String>();
     private class UpdateReadTagDataTask extends AsyncTask<String, String, Long> {
         @Override
@@ -256,16 +237,17 @@ public class search_info extends Fragment implements HttpRfidResponse {
         }
         @SuppressLint("WrongThread")
         @Override
-        protected Long doInBackground(String... params)
+        protected Long
+        doInBackground(String... params)
         {
             ArrayList<String> a = new ArrayList<String>();
             if (Check.equals(true)) {
                 for (int i = 0; i < mReadData.size(); i++) {
                     if (-1 == mShowReadData.indexOf(mReadData.get(i))) {
-                        Log.i("RFID data: ",""+mReadData.get(i));
+                        Log.d("RFID data: ",""+mReadData.get(i));
                         jsonArraytoshiba.put(mReadData.get(i).toUpperCase());
                         if (jsonArraytoshiba.length() != 0) {
-                            new HttpPostRfid(mActivity).execute(Config.CODE_LOGIN,Config.HTTP_SERVER_SHOP+Config.API_ODOO_GETMULTIPLEPRODUCT, jsonArraytoshiba.toString());
+                            new HttpPostRfidSearch(search_info.this).execute(Config.CODE_LOGIN,Config.HTTP_SERVER_SHOP+Config.API_ODOO_GETMULTIPLEPRODUCT, jsonArraytoshiba.toString());
                         }
                         a.add(mReadData.get(i));
                         if (a.size() >= 50) {
@@ -295,6 +277,7 @@ public class search_info extends Fragment implements HttpRfidResponse {
             return null;
         }
     }
+    private ArrayList<String> mReadData = new ArrayList<String>();
     private search_info.UpdateReadTagDataTask mUpdateReadTagDataTask = null;
     private DataEventHandler mDataEvent = new DataEventHandler() {
         @Override
@@ -304,7 +287,6 @@ public class search_info extends Fragment implements HttpRfidResponse {
                 mReadData.add(key);
             }
             if(Build.VERSION.SDK_INT < Build.VERSION_CODES.R){
-
                 mUpdateReadTagDataTask = new search_info.UpdateReadTagDataTask();
                 mUpdateReadTagDataTask.execute("");
             }
@@ -325,13 +307,11 @@ public class search_info extends Fragment implements HttpRfidResponse {
     private void stopReadtag() {
         if (mIsStartReadTags)
         {
-            btn_start.setImageResource(R.drawable.btn_search_start);
             showToast("Stop scan!!!");
             if (TecRfidSuite.OPOS_SUCCESS == mLib.stopReadTags(mStopReadTagsResultCallback)) {
                 Date currentTime = Calendar.getInstance().getTime();
                 Log.i("Stop scan"," " + currentTime);
             }
-            check_btn = true;
         }
     }
     private ResultCallback mStopReadTagsResultCallback = new ResultCallback() {
@@ -387,11 +367,11 @@ public class search_info extends Fragment implements HttpRfidResponse {
     }
     private void initDeviceScanVN() {
         //bluetoothDeviceConnect();
-        connectThreadScan = new ConnectThreadScan();
+        connectThreadScan = new ConnectThreadSearch();
         new Thread(new Runnable() {
             @Override
             public void run() {
-                connectThreadScan.connect(bluetoothDeviceConnected2(), mActivity, new Callable() {
+                connectThreadScan.connect(bluetoothDeviceConnected2(), search_info.this, new Callable() {
                     @Override
                     public void call(boolean result) {
                         showToast("starting…");
@@ -406,10 +386,6 @@ public class search_info extends Fragment implements HttpRfidResponse {
     private BluetoothDevice bluetoothDeviceConnected2() {
         BluetoothDevice deviceTemp = null;
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-
-//        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//            Toast.makeText(InventoryActivity.this, "First enable LOCATION ACCESS in settings.", Toast.LENGTH_LONG).show();
-//        }
 
         Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
         if (pairedDevices.size() > 0) {
@@ -449,125 +425,6 @@ public class search_info extends Fragment implements HttpRfidResponse {
             isShowProgress = false;
         }
     }
-    private void setDataEntity(JSONObject obj) {
-        String bar1,rfid,name,category;
-        int quantity = 0;
-        int cost = 0;
-        int tax = 0;
-        try
-        {
-            bar1 = obj.getString(Constants.KEY_JANCODE_1);
-            quantity = obj.getInt("quantity");
-            name = obj.getString(Constants.KEY_GOOD_NAME);
-            rfid = obj.getString(Constants.KEY_RFID);
-            category = obj.getString("Product Category");
-            inforProductEntity.setBarcodeCD1(bar1);
-            inforProductEntity.setBasePrice(cost);
-            inforProductEntity.setTypeProduct(Constants.TYPE_TABLE_INVENTORY);
-            inforProductEntity.setQuantity(quantity);
-            inforProductEntity.setTaxIncludePrice(tax);
-            inforProductEntity.setGoodName(name);
-            inforProductEntity.setRfidCode(rfid);
-            inforProductEntity.setCategory(category);
-            processBarcode(bar1,cost);
-        }
-        catch (JSONException e)
-        {
-            Log.e("setdataentity",""+e.getMessage());
-        }
-    }
-    private void processBarcode(String strBarcode,int cost){
-        //CHECK OVER LIMIT ONCE
-        if(arrDataInList.size()>=Constants.LIMIT_ONCE){
-            showDialogMessageConfirmSaveToContinue();
-            return;
-        }
-        if(strBarcode.isEmpty()){
-            return;
-        }int price = cost;
-
-        digestBarcode(strBarcode,price);
-    }
-    private void digestBarcode(String bar_code,int money) {
-        addOtherBarcode(bar_code);
-    }
-    private void addOtherBarcode(String bar_code) {
-
-        // SA-150 修正_UPC-A対応 EDIT START
-//        inforProductEntity.setProductCode1(bar_code);
-        int bar_code_length = bar_code.length();
-        switch (bar_code_length) {
-            case 8:
-                inforProductEntity.setBarcodeCD1(bar_code + "     ");
-                break;
-            case 12:
-                inforProductEntity.setBarcodeCD1("0" + bar_code);
-                break;
-            default:
-                inforProductEntity.setBarcodeCD1(bar_code);
-                break;
-        }
-        inforProductEntity.setBarcodeCD2(Constants.BLANK);
-        updateCurrentView();
-        try {
-            toneG = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
-
-            toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 200);
-
-        }
-        catch (RuntimeException e )
-        {
-            e.printStackTrace();
-        }
-    }
-    private void showDialogMessageConfirmSaveToContinue() {
-        if(IS_SHOW_DIALOG_LIMIT==0) {
-            //STOP DEVICE SCAN
-            IS_SHOW_DIALOG_LIMIT=1;
-            //Show message confirm
-            AlertDialog.Builder alertDialog = new AlertDialog.Builder(mActivity);
-            alertDialog.setMessage(String.format(Message.MESSAGE_CONFIRM_OVER_DATA, Constants.LIMIT_ONCE));
-
-            alertDialog.setCancelable(false);
-
-            // Configure alert dialog button
-            alertDialog.setPositiveButton(Message.YES_REGISTER_DATA, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    // Save list view to database
-                    showProgressRunUi();
-                    database.insertAllProductsinvCallBack(arrDataInList, new Callable() {
-                        @Override
-                        public void call(boolean result) {
-                            if(result==true){
-                                showToast(arrDataInList.size()+"");
-                                //arrDataInList.clear();
-                                restartListView();
-                                //eventEnableButton();
-                                IS_SHOW_DIALOG_LIMIT=0;
-                                dismissProgress();
-                            }
-                        }
-                    });
-
-                }
-            });
-            alertDialog.setNegativeButton(Message.NOT_REGISTER_DATA, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int i) {
-                    //eventEnableButton();
-                    IS_SHOW_DIALOG_LIMIT=0;
-                }
-            });
-
-            AlertDialog alert = alertDialog.show();
-            //eventDisableButton();
-            //eventOpenButton(false);
-            TextView messageText = (TextView) alert.findViewById(android.R.id.message);
-            assert messageText != null;
-            messageText.setGravity(Gravity.CENTER);
-        }
-    }
     private void showProgressRunUi(){
         mActivity.runOnUiThread(new Runnable() {
             @Override
@@ -576,12 +433,14 @@ public class search_info extends Fragment implements HttpRfidResponse {
             }
         });
     }
+
     @Override
     public void onDestroy() {
         if(Constants.CONFIG_DEVICE_NAME.equals(Constants.CONFIG_DEVICE_ATS100)) {
             connectThreadScan.cancel();
         }
         else if (TecRfidSuite.OPOS_SUCCESS != mLib.stopReadTags(mStopReadTagsResultCallback)){
+            stopReadtag();
         }
         super.onDestroy();
     }
@@ -589,68 +448,10 @@ public class search_info extends Fragment implements HttpRfidResponse {
     public void onResume() {
         super.onResume();
     }
-    private void restartListView() {
-        mActivity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                // Update list view
-                ListViewAdapterSearch adapterBook = new ListViewAdapterSearch(mActivity,
-                        arrDataInList);
-                lv_search.setAdapter(adapterBook);
-                // Show total number and price
-                callTotalNumberAndPrice();
 
-                // Get size of data scan in list view
-                scan_size = arrDataInList.size();
-                Log.i("Datalist size: ",""+scan_size);
-            }
-        });
-    }
-    private void callTotalNumberAndPrice() {
-
-        int intQuantity = 0;
-        for (int i = 0; i < arrDataInList.size(); i++) {
-            intQuantity += arrDataInList.get(i).getQuantity();
-        }
-        txt_qty.setText(MessageFormat.format("{0} : {1}", String.valueOf(getText(R.string.total_quantity)), intQuantity));
-
-    }
-    private void updateCurrentView() {
-        arrDataInList.add(0, inforProductEntity);
-        inforProductEntity = new InforProductEntity();
-        restartListView();
-    }
-    private void initListViewScreen() {
-
-        // check array null
-        //arrDataInList = (LinkedList<InforProductEntity>) mActivity.getLastCustomNonConfigurationInstance();
-
-        if (arrDataInList == null) {
-            arrDataInList = new LinkedList<>();
-        }
-
-        // Check if array is not null
-        restartListView();
-
-    }
-    private void reloadSQLiteData(){
-        setCustomOutput.clear();
-        setCustomOutput.clear();
-        //ADD SQLITE DATA
-        try {
-            for(InforProductEntity i : database.getAllProductsinvbyType("inventory")){
-                setCustomInput.add(i.getRfidCode());
-                setCustomOutput.add(i.getRfidCode());
-            }
-        } catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-        }
-
-    }
     List<HttpPostRfid> listHttp = new ArrayList<>();
     @Override
-    public void progressRfidFinish(String output, int typeRequestApi, String fileName) {
+    public void progressRfidFinishSearch(String output, int typeRequestApi, String fileName) {
         // KILL ALL HTTP
         if(output.contains("Exception")){
             for(HttpPostRfid http : listHttp){
@@ -665,47 +466,36 @@ public class search_info extends Fragment implements HttpRfidResponse {
 
                     JSONArray jArray = jsonObject.getJSONArray(Constants.KEY_DATA);
 
-                    Log.d("Response",""+jArray);
-
                     JSONArray jArray1 = jArray.getJSONArray(0);
-
-                    Log.d("Response head",""+jArray1);
 
                     for (int j = 0; j < jArray1.length() ; j++)
                     {
-
                         JSONObject obj2 = jArray1.getJSONObject(j);
 
-                        Log.d("obj2",""+obj2);
-
                         String stringRfid= obj2.getString(Constants.KEY_RFID);
-
-                        Log.d("stringRfid",""+stringRfid);
 
                         if(setCustomOutput.add(stringRfid))
                         {
                             try{
-                                setDataEntity(obj2);
+                                //setDataEntity(obj2);
                             }
                             catch (Exception e)
                             {
                                 Log.e("save database faile",e.getMessage());
                             }
-
                         }
                         JSONArray err = jArray.getJSONArray(1);
                         if (err != null) {
                             for (int i = 0; i < err.length(); i++) {
-                                //setRfidNotFound.add(err.get(i).toString());
+
+                                setRfidNotFound.add(err.get(i).toString());
                             }
 
-                            //total_error.setText(MessageFormat.format("{0} : {1}", getText(R.string.total_error), setRfidNotFound.size()+""));
                         }
                     }
                 }
-            } else {
-                SupModRfidCommon.showNotifyErrorDialog(mActivity).show();
             }
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

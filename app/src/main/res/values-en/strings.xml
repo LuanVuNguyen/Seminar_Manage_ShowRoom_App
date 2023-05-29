@@ -102,7 +102,7 @@
     <string name="member_name">Name:</string>
     <string name="member_ID">ID:</string>
     <string name="Member_RFID">RFID:</string>
-    <string name="Member_gender">Gender:</string>
+    <string name="Member_gender">Author:</string>
     <string name="Member_currentmembership">Membership:</string>
     <string name="Member_contact">Contact:</string>
     <string name="Book_number">Number</string>
