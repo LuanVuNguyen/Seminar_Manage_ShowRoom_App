@@ -536,6 +536,7 @@ public class MenuDeviceActivity extends AppCompatActivity implements View.OnClic
         mDissmissProgressHandler.removeCallbacks(mDissmissProgressRunnable);
         mDissmissProgressHandler = null;
         mDissmissProgressRunnable = null;
+        Constants.CONFIG_DEVICE_NAME = Constants.CONFIG_DEVICE_ATS100;
         super.onDestroy();
     }
 

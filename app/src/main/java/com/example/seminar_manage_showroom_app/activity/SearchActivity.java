@@ -37,7 +37,7 @@ public class SearchActivity extends AppCompatActivity implements BottomNavigatio
                 selectedFragment = new search_info(this);
                 break;
             case R.id.search_location:
-                selectedFragment = new search_location();
+                selectedFragment = new search_location(this);
                 break;
         }
         if (selectedFragment != null) {

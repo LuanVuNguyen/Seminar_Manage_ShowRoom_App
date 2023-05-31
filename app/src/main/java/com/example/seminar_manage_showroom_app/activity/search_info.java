@@ -116,6 +116,13 @@ public class search_info extends Fragment  implements HttpRfidResponseSearch {
     private boolean isReadBackPress = false;
     Set<String> setRfidNotFound = new HashSet<>();
     TextView txt_name, txt_id, txt_rfid, txt_author, txt_cate, txt_des;
+    private List<String> list_id = new ArrayList<>();
+    private List<String> list_bookname = new ArrayList<>();
+    private List<String> list_rfid = new ArrayList<>();
+    private List<String> list_cate = new ArrayList<>();
+    private List<String> list_author = new ArrayList<>();
+    private List<String> list_des = new ArrayList<>();
+
     /*------------------------------------------------------------*/
 
     public search_info(Activity activity) {
@@ -176,11 +183,11 @@ public class search_info extends Fragment  implements HttpRfidResponseSearch {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_search_info, container, false);
         txt_name = (TextView) view.findViewById(R.id.txt_info_bookname);
-        txt_id = (TextView) view.findViewById(R.id.txt_info_bookname);
-        txt_rfid = (TextView) view.findViewById(R.id.txt_info_bookname);
-        txt_author = (TextView) view.findViewById(R.id.txt_info_bookname);
-        txt_cate =  (TextView) view.findViewById(R.id.txt_info_bookname);
-        txt_des = (TextView) view.findViewById(R.id.txt_info_bookname);
+        txt_id = (TextView) view.findViewById(R.id.txt_info_id);
+        txt_rfid = (TextView) view.findViewById(R.id.txt_info_RFID);
+        txt_author = (TextView) view.findViewById(R.id.txt_info_author);
+        txt_cate =  (TextView) view.findViewById(R.id.txt_info_cate);
+        txt_des = (TextView) view.findViewById(R.id.txt_info_des);
         return view;
     }
 
@@ -244,12 +251,13 @@ public class search_info extends Fragment  implements HttpRfidResponseSearch {
             if (Check.equals(true)) {
                 for (int i = 0; i < mReadData.size(); i++) {
                     if (-1 == mShowReadData.indexOf(mReadData.get(i))) {
-                        Log.d("RFID data: ",""+mReadData.get(i));
+
                         jsonArraytoshiba.put(mReadData.get(i).toUpperCase());
                         if (jsonArraytoshiba.length() != 0) {
                             new HttpPostRfidSearch(search_info.this).execute(Config.CODE_LOGIN,Config.HTTP_SERVER_SHOP+Config.API_ODOO_GETMULTIPLEPRODUCT, jsonArraytoshiba.toString());
                         }
                         a.add(mReadData.get(i));
+                        a.clear();
                         if (a.size() >= 50) {
                             publishProgress(a.toArray(new String[a.size()]));
                             a.clear();
@@ -425,15 +433,6 @@ public class search_info extends Fragment  implements HttpRfidResponseSearch {
             isShowProgress = false;
         }
     }
-    private void showProgressRunUi(){
-        mActivity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                showProgress();
-            }
-        });
-    }
-
     @Override
     public void onDestroy() {
         if(Constants.CONFIG_DEVICE_NAME.equals(Constants.CONFIG_DEVICE_ATS100)) {
@@ -441,6 +440,7 @@ public class search_info extends Fragment  implements HttpRfidResponseSearch {
         }
         else if (TecRfidSuite.OPOS_SUCCESS != mLib.stopReadTags(mStopReadTagsResultCallback)){
             stopReadtag();
+            mLib.close();
         }
         super.onDestroy();
     }
@@ -459,7 +459,6 @@ public class search_info extends Fragment  implements HttpRfidResponseSearch {
             }
         }
         try {
-            Log.d("OUTPUT", output);
             JSONObject jsonObject = new JSONObject(output);
             if (SupModRfidCommon.isStatusHttpOk(output)) {
                 if (jsonObject.getString(Constants.KEY_CODE).equals(Constants.VALUE_CODE_OK)) {
@@ -472,25 +471,41 @@ public class search_info extends Fragment  implements HttpRfidResponseSearch {
                     {
                         JSONObject obj2 = jArray1.getJSONObject(j);
 
-                        String stringRfid= obj2.getString(Constants.KEY_RFID);
-
-                        if(setCustomOutput.add(stringRfid))
-                        {
                             try{
-                                //setDataEntity(obj2);
+                                  list_id.add(obj2.getString(Constants.KEY_JANCODE_1));
+                                  list_bookname.add(obj2.getString(Constants.KEY_GOOD_NAME));
+                                  list_rfid.add(obj2.getString(Constants.KEY_RFID));
+                                  list_cate.add(obj2.getString( "Product Category"));
+                                  list_author.add(obj2.getString(Constants.KEY_COST));
+                                  list_des.add(obj2.getString(Constants.KEY_COST));
+
+
+                                  txt_name.setText(list_bookname.get(0));
+                                  txt_id.setText(list_id.get(0));
+                                  txt_rfid.setText(list_rfid.get(0));
+                                  txt_author.setText(list_author.get(0));
+                                  txt_cate.setText(list_cate.get(0));
+                                  txt_des.setText(list_des.get(0));
+
+
+                                  list_id.clear();
+                                  list_bookname.clear();
+                                  list_rfid.clear();
+                                  list_cate.clear();
+                                  list_des.clear();
+                                  list_author.clear();
                             }
                             catch (Exception e)
                             {
-                                Log.e("save database faile",e.getMessage());
+                                Log.e("Faile set textview",e.getMessage());
                             }
-                        }
+
                         JSONArray err = jArray.getJSONArray(1);
                         if (err != null) {
                             for (int i = 0; i < err.length(); i++) {
 
                                 setRfidNotFound.add(err.get(i).toString());
                             }
-
                         }
                     }
                 }
@@ -500,4 +515,5 @@ public class search_info extends Fragment  implements HttpRfidResponseSearch {
             e.printStackTrace();
         }
     }
+
 }

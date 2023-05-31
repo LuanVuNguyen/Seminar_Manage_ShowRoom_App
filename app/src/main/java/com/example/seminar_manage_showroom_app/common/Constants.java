@@ -15,7 +15,7 @@ public class Constants {
     //public static final String KEY_COST = "drgm_cost_price";
     public static final String KEY_COST = "Price";
     //public static final String KEY_TAX = "drgm_price_tax_off";
-    public static final String KEY_TAX = "Customers_taxes";
+    public static final String KEY_CATE = "Product Category";
     public static int POWER_LEVEL_INVENTORY_REGISTRATION_VJ = 16;
 
     // Format code CD1 & CD@

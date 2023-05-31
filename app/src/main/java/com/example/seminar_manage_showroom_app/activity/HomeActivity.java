@@ -5,16 +5,19 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.seminar_manage_showroom_app.R;
+import com.example.seminar_manage_showroom_app.common.Constants;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageView btn_search,btn_pay,btn_inventory,btn_creproduct,btn_setting,btn_profile,btn_logout,avatar;
 
+    private TextView txt_device;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -51,6 +54,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         avatar = (ImageView) findViewById(R.id.img_avatar);
         avatar.setOnClickListener(this);
+
+        txt_device = (TextView) findViewById(R.id.device_conect);
+        txt_device.setText(Constants.CONFIG_DEVICE_NAME);
     }
 
     @Override

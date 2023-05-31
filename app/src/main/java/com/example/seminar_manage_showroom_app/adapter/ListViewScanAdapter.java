@@ -1,6 +1,7 @@
 package com.example.seminar_manage_showroom_app.adapter;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,18 +15,14 @@ import com.example.seminar_manage_showroom_app.common.entities.InforProductEntit
 
 import java.util.LinkedList;
 
-/**
- * List View Adapter for Register Data Screen
- *
- * @author Tai-LQ
- * @since 2019/06/10
- */
 public class ListViewScanAdapter extends BaseAdapter implements Filterable{
 
     private LinkedList<InforProductEntity> list;
     private LinkedList<InforProductEntity> listOld;
     private Activity activity;
     private int sizeList;
+
+    private int selectedPosition = -1;
 
     public ListViewScanAdapter(Activity activity, LinkedList<InforProductEntity> list) {
 
@@ -36,11 +33,6 @@ public class ListViewScanAdapter extends BaseAdapter implements Filterable{
         this.listOld=list;
     }
 
-
-
-    /**
-     * Init View Holder
-     */
     private class ViewHolder {
 
         TextView lv_title_column1;
@@ -50,38 +42,21 @@ public class ListViewScanAdapter extends BaseAdapter implements Filterable{
         TextView lv_title_column5;
 
     }
-
-    /**
-     * Get count item
-     */
     @Override
     public int getCount() {
         return list.size();
     }
 
-    /**
-     * Get item at index
-     */
     @Override
     public Object getItem(int position) {
         return list.get(position);
     }
 
-    /**
-     * Get Item Id with position
-     */
     @Override
     public long getItemId(int position) {
         return 0;
     }
 
-    /**
-     * Set custom layout for list view
-     *
-     * @param position    int
-     * @param convertView {@link View}
-     * @param parent      {@link ViewGroup}
-     */
     @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
 
@@ -110,6 +85,23 @@ public class ListViewScanAdapter extends BaseAdapter implements Filterable{
         viewHolder.lv_title_column3.setText(item.getBarcodeCD1());
         viewHolder.lv_title_column5.setText(String.valueOf(item.getQuantity()));
         viewHolder.lv_title_column2.setText(String.valueOf(item.getCategory()));
+
+        // Thay đổi màu sắc của hàng được chọn
+        if (position == selectedPosition) {
+            convertView.setBackgroundColor(Color.YELLOW); // Thay đổi màu nền của hàng khi được chọn
+        } else {
+            convertView.setBackgroundColor(Color.TRANSPARENT); // Đặt màu nền của hàng về mặc định
+        }
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedPosition = position; // Cập nhật vị trí hàng được chọn
+                notifyDataSetChanged(); // Cập nhật giao diện người dùng
+
+                // Xử lý logic khác sau khi nhấp vào hàng
+                // ...
+            }
+        });
         return convertView;
     }
     @Override
@@ -141,7 +133,6 @@ public class ListViewScanAdapter extends BaseAdapter implements Filterable{
             }
         };
     }
-
     @Override
     public int getViewTypeCount() {
         return 2;
