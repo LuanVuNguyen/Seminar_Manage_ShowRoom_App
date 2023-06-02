@@ -99,7 +99,7 @@
             android:exported="false">
         </activity>
 
-        <activity android:name=".activity.ScanActivity"
+        <activity android:name=".activity.SearchLocationActivity"
             android:exported="false">
         </activity>
 
