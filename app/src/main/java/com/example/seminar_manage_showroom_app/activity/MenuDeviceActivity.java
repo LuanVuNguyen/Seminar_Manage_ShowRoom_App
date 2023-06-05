@@ -1,7 +1,5 @@
 package com.example.seminar_manage_showroom_app.activity;
 
-import static com.example.seminar_manage_showroom_app.common.Constants.CONFIG_DEVICE_TOSHIBATEC;
-
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
@@ -333,7 +331,7 @@ public class MenuDeviceActivity extends AppCompatActivity implements View.OnClic
         readInitSettingFile();
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.mainmenu);
+        setContentView(R.layout.activity_menu_setting);
 
         mMenuDeviceActivity = this;
 
