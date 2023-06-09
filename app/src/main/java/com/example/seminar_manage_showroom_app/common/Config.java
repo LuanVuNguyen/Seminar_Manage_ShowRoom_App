@@ -40,14 +40,11 @@ public class Config {
      * #HUYNHQUANGVINH API RFID TO JAN
      */
     //public static final String API_RFID_TO_JAN = HTTP_SERVER_SHOP + "/api/v2/rfids_to_jans";
-    public static final String API_ODOO_GETBOOK = "/library_controller/get_book";
-    public static final String API_ODOO_GETMEMBER = "/library_controller/get_member";
-    public static final String API_ODOO_ISSUEBOOK = "/library_controller/issue";
     public static final String API_ODOO_GETMULTIPLEPRODUCT = "/inventory_controller/get_quant";
-    public static final String API_ODOO_CREATEINVENTORY = "/inventory_controller/create_fileinventory";
-    public static final String API_ODOO_GETINFOPRODUCT = "/inventory_controller/get_info_product";
-    public static final String API_ODOO_REGISTERRFID = "/inventory_controller/register_product";
-    public static final String API_ODOO_CREATENEWPRODUCT = "/inventory_controller/creat_new_product";
+    public static final String API_LOGIN = "/web/session/authenticate";
+
+    public static final String API_INFO_USER = "/inventory_controller/get_user_info";
+
 
 
 

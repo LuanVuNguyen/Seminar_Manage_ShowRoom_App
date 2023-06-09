@@ -1,9 +1,7 @@
 package com.example.seminar_manage_showroom_app.activity;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +20,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     private void init()
     {
-        btn_in = (ImageView) findViewById(R.id.btn_signup);
+        btn_in = (ImageView) findViewById(R.id.btn_login);
         btn_in.setOnClickListener(this);
         btn_out = (ImageView) findViewById(R.id.btn_back);
         btn_out.setOnClickListener(this);
@@ -34,7 +32,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.btn_back:
                 onBackPressed();
                 break;
-            case R.id.btn_signup:
+            case R.id.btn_login:
                 System.out.println("Register Succesfull");
                 break;
 

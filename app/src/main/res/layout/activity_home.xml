@@ -44,7 +44,7 @@
                 tools:srcCompat="@tools:sample/avatars" />
 
             <EditText
-                android:id="@+id/txt_name"
+                android:id="@+id/txt_posite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -57,7 +57,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/txt_location"
+                android:id="@+id/txt_name1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

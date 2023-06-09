@@ -762,7 +762,7 @@ public class SettingActivity extends Activity implements View.OnClickListener, N
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_option_setting);
+		setContentView(R.layout.setting);
 
         mDeviceType = getIntent().getStringExtra(MenuDeviceActivity.KEY_DEVICENAME);
 

@@ -50,7 +50,8 @@
             android:drawableStart="@drawable/email"
             android:drawablePadding="16dp"
             android:ems="10"
-            android:hint="Email"
+            android:hint="Email or username"
+            android:text="admin"
             android:inputType="textPersonName"
             android:padding="16dp"
             android:textColorHint="#3D608c"
@@ -68,7 +69,8 @@
             android:drawablePadding="16dp"
             android:ems="10"
             android:hint="Password"
-            android:inputType="textPersonName"
+            android:text="admin"
+            android:inputType="textPassword"
             android:padding="16dp"
             android:textColorHint="#3D608c"
             android:textSize="18dp" />
@@ -78,7 +80,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/btn_signup"
+                android:id="@+id/btn_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"

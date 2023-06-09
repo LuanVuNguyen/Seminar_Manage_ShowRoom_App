@@ -78,8 +78,8 @@ public class SearchLocationActivity extends LibAccessBaseActivity implements Vie
         } else {
             mEpcText = new TextView(SearchLocationActivity.this);
         }
-        //mEpcText.setText(searchTarget);
-        mEpcText.setText("E28069950000500AC144D55A");
+        mEpcText.setText(searchTarget);
+        //mEpcText.setText("E28069950000500AC144D55A");
 
         Object omSearchStartBtn = findViewById(R.id.search_start_btn);
         if (omSearchStartBtn instanceof ImageView) {
