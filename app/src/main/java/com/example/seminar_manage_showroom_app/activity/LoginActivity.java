@@ -60,6 +60,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(new Intent(this, SignUpActivity.class));
                 break;
             case R.id.btn_login:
+                //startActivity(new Intent(this, HomeActivity.class));
                 getDataFromApi();
                 break;
             case R.id.btn_login_guest:
@@ -68,7 +69,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
     private void getDataFromApi() {
-        String db = "odoo";
+        String db = "odoo_v2";
         String login = txt_login.getText().toString();
         String password = txt_pwd.getText().toString();
         if (login.isEmpty() || password.isEmpty()) {

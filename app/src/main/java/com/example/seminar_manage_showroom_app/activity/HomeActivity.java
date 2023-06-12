@@ -25,7 +25,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     private ImageView btn_search,btn_pay,btn_inventory,btn_creproduct,btn_setting,btn_profile,btn_logout,avatar;
     private TextView txt_device, txt_posite, txt_name;
-    private String uid = null, txt_base64_avt;
+    private String uid = "2", txt_base64_avt;
     Api_HomeClient HomeClient = new Api_HomeClient();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,15 +33,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         init();
-        Intent intent = getIntent();
-        if (intent != null) {
-            String errorMessage = intent.getStringExtra("error_message");
-            if (errorMessage != null) {
-                onBackPressed();
-            } else {
-                uid = intent.getStringExtra("uid");
-            }
-        }
+//        Intent intent = getIntent();
+//        if (intent != null) {
+//            String errorMessage = intent.getStringExtra("error_message");
+//            if (errorMessage != null) {
+//                onBackPressed();
+//            } else {
+//                uid = intent.getStringExtra("uid");
+//            }
+//        }
+
         ApiGetUser(uid);
     }
     private void ApiGetUser(String uid){

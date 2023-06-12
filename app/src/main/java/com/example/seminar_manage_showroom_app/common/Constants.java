@@ -150,6 +150,7 @@ public class Constants {
     // Device
     //public static  String CONFIG_DEVICE_NAME="ATS100-SG UHF Reader";
     public static  String CONFIG_DEVICE_NAME="ATS100-SG UHF Reader";
+    //public static  String CONFIG_DEVICE_NAME="Toshiba Tec";
     public static final String CONFIG_DEVICE_ATS100="ATS100-SG UHF Reader";
     public static final String CONFIG_DEVICE_TOSHIBATEC="Toshiba Tec";
     public static String CONFIG_SIGNAL_CONECT="0";

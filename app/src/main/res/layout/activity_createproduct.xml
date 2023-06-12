@@ -162,13 +162,12 @@
                             android:id="@+id/txt_edit_category"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-
-                            android:background="@drawable/cell_shape_4"
-                            android:ems="10"
+                            android:background="@drawable/bg_edittext" android:ems="10"
                             android:hint="Book category"
-                            android:inputType="textPersonName"
+                            android:inputType="text"
                             android:textAlignment="center"
                             android:textColorHint="#3D608c"
+
                             android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -255,7 +254,7 @@
                             android:background="@drawable/cell_shape_4"
                             android:ems="10"
                             android:hint="Book price"
-                            android:inputType="textPersonName"
+                            android:inputType="number"
                             android:textAlignment="center"
                             android:textColorHint="#3D608c"
                             android:textSize="14sp"
@@ -297,7 +296,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.5"
+                android:layout_weight="0.3"
                 android:background="@drawable/cell_shape_title_1"
                 android:orientation="horizontal">
 
@@ -309,7 +308,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="0.13"
+                        android:layout_weight="0.20"
                         android:background="@drawable/linenear_layout"
                         android:gravity="center_horizontal|center_vertical"
                         android:orientation="horizontal">
@@ -362,19 +361,22 @@
                         android:id="@+id/preview"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="0.13"
+                        android:layout_weight="0.20"
                         android:background="@drawable/linenear_layout"
                         android:gravity="center_horizontal|center_vertical"
-                        android:text="PREVIEW"
+                        android:text="Pictures of books"
                         android:textAlignment="center"
                         android:textColor="@color/white"
                         android:textStyle="normal|bold" />
 
-                    <ListView
-                        android:id="@+id/list_preview"
+                    <ImageView
+                        android:id="@+id/avt_book_creat"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="1.8" />
+                        android:layout_weight="1.8"
+                        android:scaleType="fitCenter"
+                        tools:srcCompat="@tools:sample/avatars" />
+
                 </LinearLayout>
 
             </LinearLayout>
@@ -422,10 +424,10 @@
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/btn_clear2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/btn_create" />
+        app:srcCompat="@drawable/upload" />
 
     <ImageView
-        android:id="@+id/btn_preview"
+        android:id="@+id/btn_camera"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginEnd="10dp"
@@ -433,6 +435,6 @@
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/btn_create"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/btn_preview" />
+        app:srcCompat="@drawable/camera" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
