@@ -1,6 +1,6 @@
 package com.example.seminar_manage_showroom_app.activity;
 
-import android.content.Intent;
+import  android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,26 +11,22 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.seminar_manage_showroom_app.R;
-import com.example.seminar_manage_showroom_app.api.HttpPostRfid;
+import com.example.seminar_manage_showroom_app.api.Api_GetAllProfile;
+import com.example.seminar_manage_showroom_app.api.Api_HomeClient;
+import com.example.seminar_manage_showroom_app.api.LoginClient;
+import com.example.seminar_manage_showroom_app.common.Config;
 import com.example.seminar_manage_showroom_app.common.Constants;
-import com.example.seminar_manage_showroom_app.common.function.SupModRfidCommon;
 import com.google.gson.JsonObject;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.InputStream;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView btn_Login;
     private ImageView btn_Signup, btn_Guest;
     EditText txt_login, txt_pwd;
-
+    Api_GetAllProfile info_product = new Api_GetAllProfile();
     LoginClient loginClient = new LoginClient();
 
     @Override
@@ -38,7 +34,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Init();
-
+        GetInfoProduct();
     }
 
     private void Init() {
@@ -48,7 +44,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btn_Login.setOnClickListener(this);
         btn_Guest = findViewById(R.id.btn_login_guest);
         btn_Guest.setOnClickListener(this);
-
         txt_login = findViewById(R.id.txt_Login_email);
         txt_pwd = findViewById(R.id.txt_Login_email);
     }
@@ -69,7 +64,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
     private void getDataFromApi() {
-        String db = "odoo_v2";
+        String db = Config.DATABASE_NAME;
         String login = txt_login.getText().toString();
         String password = txt_pwd.getText().toString();
         if (login.isEmpty() || password.isEmpty()) {
@@ -116,6 +111,30 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
             });
         }
+    }
+    private void GetInfoProduct(){
+        System.out.println("resultObj");
+        info_product.GetData(new Api_GetAllProfile.ApiCallback() {
+            @Override
+            public void onSuccess(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (jsonObject.getString(Constants.KEY_CODE).equals(Constants.VALUE_CODE_OK)) {
+                        JSONObject resultObj = jsonObject.getJSONObject("products");
+                        System.out.println(resultObj);
+                    }
+                }
+                catch (JSONException e){
+
+                }
+
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+
+            }
+        });
     }
 
     private void showToast(String s) {

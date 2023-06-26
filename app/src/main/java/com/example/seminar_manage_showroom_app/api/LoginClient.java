@@ -1,4 +1,4 @@
-package com.example.seminar_manage_showroom_app.activity;
+package com.example.seminar_manage_showroom_app.api;
 
 import com.example.seminar_manage_showroom_app.common.Config;
 import com.google.gson.JsonObject;
@@ -30,7 +30,6 @@ public class LoginClient {
         String json = "{\"jsonrpc\":\"2.0\",\"params\":{\"db\":\"" + db + "\",\"login\":\"" + login + "\",\"password\":\"" + password + "\"}}";
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
         RequestBody requestBody = RequestBody.create(mediaType, json);
-
         Request request = new Request.Builder()
                 .url(BASE_URL + Config.API_LOGIN)
                 .post(requestBody)

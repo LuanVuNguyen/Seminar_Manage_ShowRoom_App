@@ -12,12 +12,12 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class Api_HomeClient {
+public class Api_LogOut {
     private static final String BASE_URL = Config.HTTP_SERVER_SHOP;
 
     private OkHttpClient client;
 
-    public Api_HomeClient() {
+    public Api_LogOut() {
         client = new OkHttpClient();
     }
 

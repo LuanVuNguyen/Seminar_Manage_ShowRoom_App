@@ -157,10 +157,6 @@ public class InventoryActivity extends AppCompatActivity implements View.OnClick
         BluetoothDevice deviceTemp = null;
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
-//        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//            Toast.makeText(InventoryActivity.this, "First enable LOCATION ACCESS in settings.", Toast.LENGTH_LONG).show();
-//        }
-
         Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
         if (pairedDevices.size() > 0) {
             // There are paired devices. Get the name and address of each paired device.
@@ -284,6 +280,7 @@ public class InventoryActivity extends AppCompatActivity implements View.OnClick
         public void onEvent(HashMap<String, TagPack> tagList) {
             for (Map.Entry<String, TagPack> e : tagList.entrySet()) {
                 String key = e.getKey();
+                Log.d("RFID",key);
                 mReadData.add(key);
             }
             if(Build.VERSION.SDK_INT < Build.VERSION_CODES.R){
@@ -297,7 +294,7 @@ public class InventoryActivity extends AppCompatActivity implements View.OnClick
         @Override
         protected void onPostExecute(Long result) {
             if (TecRfidSuite.OPOS_SUCCESS != mLib.setDataEventEnabled(true)){
-                System.out.println("Vuluan:onPostExecute "+result);
+                Log.i("UpdateReadTagDataTask","DataEventEnabled True");
             }
             super.onPostExecute(result);
         }
@@ -327,6 +324,7 @@ public class InventoryActivity extends AppCompatActivity implements View.OnClick
             ArrayList<String> a = new ArrayList<String>();
             if (Check.equals(true)) {
                 for (int i = 0; i < mReadData.size(); i++) {
+
                     if (-1 == mShowReadData.indexOf(mReadData.get(i))) {
                         Log.i("RFID data: ",""+mReadData.get(i));
                         jsonArraytoshiba.put(mReadData.get(i).toUpperCase());
@@ -380,7 +378,7 @@ public class InventoryActivity extends AppCompatActivity implements View.OnClick
             showToast("Stop scan!!!");
             if (TecRfidSuite.OPOS_SUCCESS == mLib.stopReadTags(mStopReadTagsResultCallback)) {
                 Date currentTime = Calendar.getInstance().getTime();
-                Log.i("Stop scan"," " + currentTime);
+                Log.i("Stop scan","Stop scan " + currentTime);
             }
         }
     }

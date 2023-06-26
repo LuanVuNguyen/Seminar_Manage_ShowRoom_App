@@ -85,8 +85,8 @@ public class CreateProductActivity extends AppCompatActivity implements HttpRfid
     ImageView btn_preview, btn_creat;
     ImageView btn_start, btn_stop, btn_clear, avt_book;
     ListView lv_rfid;
-    EditText txt_bookname,txt_author,txt_cate,txt_id,txt_price,txt_pub;
-    TextView txt_count;
+    EditText txt_bookname,txt_author,txt_id,txt_price,txt_pub;
+    TextView txt_count,txt_cate;
     SQLiteDatabaseHandler database;
     TextView txt_qty;
     Set<String> setCustomOutput = new HashSet<>();
@@ -202,7 +202,7 @@ public class CreateProductActivity extends AppCompatActivity implements HttpRfid
 
         txt_bookname = (EditText) findViewById(R.id.txt_edit_bookname);
         txt_author = (EditText) findViewById(R.id.txt_edit_author);
-        txt_cate = (EditText) findViewById(R.id.txt_edit_category);
+        txt_cate = (TextView) findViewById(R.id.txt_edit_category);
         txt_cate.setText(itemtostring());
         txt_cate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -245,13 +245,16 @@ public class CreateProductActivity extends AppCompatActivity implements HttpRfid
     }
     private String itemtostring(){
         String text = "", select="";
-        int convert;
+        int convert=1;
         for (int i = 0;i<selectitem.length;i++){
             if (selectitem[i]){
                 text = text+i;
+
                 convert = Integer.parseInt(text);
                 id_cate = convert + 1;
+
                 text = Integer.toString(id_cate);
+
                 select = select+list_Cate[i];
             }
         }
@@ -316,19 +319,19 @@ public class CreateProductActivity extends AppCompatActivity implements HttpRfid
                                 }
                             }
                         } catch (JSONException e) {
-                            notify.showDialog("API ERROR",e.getMessage());
+
                         }
                     }
 
                     @Override
                     public void onError(String errorMessage) {
-                        notify.showDialog("API ERROR",errorMessage);
+
                     }
                 });
-                Thread.sleep(1000);
+                Thread.sleep(2000);
             }
             catch (Exception e){
-                notify.showDialog("API ERROR",e.getMessage());
+
             }
             id = txt_id.getText().toString();
         }

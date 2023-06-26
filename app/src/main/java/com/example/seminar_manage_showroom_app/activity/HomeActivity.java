@@ -33,17 +33,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         init();
-//        Intent intent = getIntent();
-//        if (intent != null) {
-//            String errorMessage = intent.getStringExtra("error_message");
-//            if (errorMessage != null) {
-//                onBackPressed();
-//            } else {
-//                uid = intent.getStringExtra("uid");
-//            }
-//        }
-
-        ApiGetUser(uid);
+        Intent intent = getIntent();
+        if (intent != null) {
+            String errorMessage = intent.getStringExtra("error_message");
+            if (errorMessage != null) {
+                onBackPressed();
+            } else {
+                uid = intent.getStringExtra("uid");
+            }
+        }
     }
     private void ApiGetUser(String uid){
         HomeClient.postData(uid, new Api_HomeClient.ApiCallback() {
@@ -119,12 +117,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         avatar = (ImageView) findViewById(R.id.img_avatar);
 
-
         txt_device = (TextView) findViewById(R.id.device_conect);
         txt_device.setText(Constants.CONFIG_DEVICE_NAME);
 
         txt_name = (TextView) findViewById(R.id.txt_name1);
         txt_posite = (TextView) findViewById(R.id.txt_posite);
+
+        ApiGetUser(uid);
     }
 
     @Override
