@@ -31,6 +31,8 @@ import android.view.WindowInsets;
 import android.view.WindowManager;
 import android.view.WindowMetrics;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -44,9 +46,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.seminar_manage_showroom_app.R;
+import com.example.seminar_manage_showroom_app.adapter.ProductAdapter;
+import com.example.seminar_manage_showroom_app.api.Api_GetInfoProduct;
 import com.example.seminar_manage_showroom_app.common.Constants;
+import com.example.seminar_manage_showroom_app.common.Product;
 import com.example.seminar_manage_showroom_app.common.interfaces.NotifyForActivityInterface;
 import com.example.seminar_manage_showroom_app.log.Log;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -74,6 +83,7 @@ public class search_location extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private EditText txt_bookname;
+    private TextView txt_targetRFID;
     private String mParam1;
     private String mParam2;
     private Button btn_continue;
@@ -112,6 +122,10 @@ public class search_location extends Fragment {
     public static final String SEARCH_RADAR_DRAW_MODE = "Config_Radar_DrawMode";
     public static final int DEFAULT_FW_MODE = 1;
     private static final String NEWLINE = "\n";
+    Api_GetInfoProduct info_product = new Api_GetInfoProduct();
+    ArrayList<Product> productList = new ArrayList<>();
+    private static boolean isFirst = true;
+
     /*--------------------------------------------------------------------------------*/
     public search_location(Activity activity) {
         this.mActivity = activity;
@@ -129,7 +143,6 @@ public class search_location extends Fragment {
     }
 
 
-    private static boolean isFirst = true;
     @Override
     public void onResume() {
         Log.info(START);
@@ -160,10 +173,10 @@ public class search_location extends Fragment {
             mActivity.getActionBar().setDisplayHomeAsUpEnabled(true);
         }
         mActivity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
         Log.setMaxFileSize(mSDKLogSize);
         Log.setLogOutPut(WRITE_TO_CONSOLE_AND_SD);
         Log.setNowLevel(mSDKLogLevel);
+
     }
 
     public void setLib(LibAccessBaseActivity libAccessBaseActivity){
@@ -184,9 +197,19 @@ public class search_location extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_search_location, container, false);
         btn_continue = (Button) view.findViewById(R.id.btn_continue);
-
+        GetInfoProduct();
         txt_bookname = (EditText) view.findViewById(R.id.txt_search_bookname);
+        txt_targetRFID = (TextView) view.findViewById(R.id.target_text);
         lv_search = (ListView) view.findViewById(R.id.lv_search_location);
+        lv_search.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                // Xử lý sự kiện khi người dùng nhấp vào mục tại vị trí 'position'
+                Product selectedProduct = productList.get(position);
+                String rfidValue = selectedProduct.getX_RFID_PRODUCT();
+                txt_targetRFID.setText(rfidValue);
+            }
+        });
 
         txt_bookname.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -212,10 +235,17 @@ public class search_location extends Fragment {
                 boolean isKeyboardOpen = keyboardHeight > screenHeight * 0.15; // Điều kiện tùy chỉnh
 
                 if (!isKeyboardOpen) {
-                    showToast(txt_bookname.getText().toString());
+                    System.out.println("");
                 }
             }
         });
+        mSearchRadaMenuActivity = this;
+        Object omSearchEditText = view.findViewById(R.id.target_text);
+        if (omSearchEditText instanceof EditText) {
+            mSearchEditText = (EditText) omSearchEditText;
+        } else {
+            mSearchEditText = new EditText(mActivity);
+        }
 
         btn_continue.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -223,7 +253,8 @@ public class search_location extends Fragment {
                 if (v.equals(btn_continue)) {
                     Intent intent = new Intent(getActivity(), SearchLocationActivity.class);
                     if (isSelectedEPC) {
-                        searchTarget = mSearchEditText.getText().toString();
+//                      searchTarget = mSearchEditText.getText().toString();
+                        searchTarget = txt_targetRFID.getText().toString();
                         if (searchTarget.length() == 0) {
                             libAccessBaseActivity.showDialog(getString(R.string.title_error), getString(R.string.message_target_not_set_error), getString(R.string.btn_txt_ok), null);
                             return;
@@ -243,16 +274,45 @@ public class search_location extends Fragment {
                 }
             }
         });
-        mSearchRadaMenuActivity = this;
-        Object omSearchEditText = view.findViewById(R.id.target_text);
-        if (omSearchEditText instanceof EditText) {
-            mSearchEditText = (EditText) omSearchEditText;
-        } else {
-            mSearchEditText = new EditText(mActivity);
-        }
 
         return view;
     }
+    private void GetInfoProduct(){
+        info_product.getProductInfo(new Api_GetInfoProduct.ApiCallback() {
+            @Override
+            public void onSuccess(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (jsonObject.getString(Constants.KEY_CODE).equals(Constants.VALUE_CODE_OK)) {
+                        JSONObject resultObj = jsonObject.getJSONObject("result");
+                        JSONArray productsArray = resultObj.getJSONArray("products");
+                        for (int i = 0; i < productsArray.length(); i++) {
+                            JSONObject productJson = productsArray.getJSONObject(i);
+
+                            String name = productJson.getString("name");
+                            String x_RFID_PRODUCT = productJson.getString("x_RFID_PRODUCT");
+
+                            Product product = new Product(name, x_RFID_PRODUCT);
+                            productList.add(product);
+                        }
+
+                        ProductAdapter adapter = new ProductAdapter(mActivity, productList);
+                        lv_search.setAdapter(adapter);
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                System.out.println(errorMessage);
+            }
+        });
+    }
+
     public static void setListener(NotifyForActivityInterface listener) {
         mSettingTool = listener;
     }

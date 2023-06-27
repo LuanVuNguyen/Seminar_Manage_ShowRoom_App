@@ -14,7 +14,7 @@
 
         <SurfaceView
             android:id="@+id/radar_surfaceView"
-            android:layout_width="445dp"
+            android:layout_width="345dp"
             android:layout_height="345dp"></SurfaceView>
 
         <TextView

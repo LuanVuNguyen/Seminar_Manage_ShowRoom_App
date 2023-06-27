@@ -1,6 +1,6 @@
 package com.example.seminar_manage_showroom_app.activity;
 
-import  android.content.Intent;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,12 +11,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.seminar_manage_showroom_app.R;
-import com.example.seminar_manage_showroom_app.api.Api_GetAllProfile;
-import com.example.seminar_manage_showroom_app.api.Api_HomeClient;
+import com.example.seminar_manage_showroom_app.api.Api_GetInfoProduct;
 import com.example.seminar_manage_showroom_app.api.LoginClient;
 import com.example.seminar_manage_showroom_app.common.Config;
 import com.example.seminar_manage_showroom_app.common.Constants;
-import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,7 +24,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ImageView btn_Login;
     private ImageView btn_Signup, btn_Guest;
     EditText txt_login, txt_pwd;
-    Api_GetAllProfile info_product = new Api_GetAllProfile();
     LoginClient loginClient = new LoginClient();
 
     @Override
@@ -34,7 +31,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Init();
-        GetInfoProduct();
+
     }
 
     private void Init() {
@@ -112,30 +109,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             });
         }
     }
-    private void GetInfoProduct(){
-        System.out.println("resultObj");
-        info_product.GetData(new Api_GetAllProfile.ApiCallback() {
-            @Override
-            public void onSuccess(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    if (jsonObject.getString(Constants.KEY_CODE).equals(Constants.VALUE_CODE_OK)) {
-                        JSONObject resultObj = jsonObject.getJSONObject("products");
-                        System.out.println(resultObj);
-                    }
-                }
-                catch (JSONException e){
 
-                }
-
-            }
-
-            @Override
-            public void onError(String errorMessage) {
-
-            }
-        });
-    }
 
     private void showToast(String s) {
         runOnUiThread(new Runnable() {

@@ -9,6 +9,7 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,8 +26,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     private ImageView btn_search,btn_pay,btn_inventory,btn_creproduct,btn_setting,btn_profile,btn_logout,avatar;
     private TextView txt_device, txt_posite, txt_name;
-    private String uid = "2", txt_base64_avt;
+    private String uid = "2";
     Api_HomeClient HomeClient = new Api_HomeClient();
+    private  int DOUBLE_BACK_PRESS_COUNT = 2;
+    private int backPressedCount = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -165,4 +168,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
+    @Override
+    public void onBackPressed() {
+        if (backPressedCount < DOUBLE_BACK_PRESS_COUNT - 1) {
+            backPressedCount++;
+            Toast.makeText(this, "Press Back again to exit", Toast.LENGTH_SHORT).show();
+        } else {
+            finishAffinity();
+        }
+    }
+
 }
