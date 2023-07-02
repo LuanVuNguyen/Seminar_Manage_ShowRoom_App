@@ -21,13 +21,13 @@ public class Api_LogOut {
         client = new OkHttpClient();
     }
 
-    public void postData(String uid,  final Api_HomeClient.ApiCallback callback) {
+    public void Logout(String uid,  final Api_LogOut.ApiCallback callback) {
         String json = "{\"id\":\"" + uid + "\"}";
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
         RequestBody requestBody = RequestBody.create(mediaType, json);
 
         Request request = new Request.Builder()
-                .url(BASE_URL + Config.API_INFO_USER)
+                .url(BASE_URL + Config.API_LOGOUT)
                 .post(requestBody)
                 .build();
 

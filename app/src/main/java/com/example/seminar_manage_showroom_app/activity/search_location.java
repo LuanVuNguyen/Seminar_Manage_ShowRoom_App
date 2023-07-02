@@ -17,6 +17,7 @@ import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -167,6 +168,8 @@ public class search_location extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
         checkPermission();
         readInitSettingFile();
         if(mActivity.getActionBar()!=null) {
@@ -296,8 +299,8 @@ public class search_location extends Fragment {
                             productList.add(product);
                         }
 
-                        ProductAdapter adapter = new ProductAdapter(mActivity, productList);
-                        lv_search.setAdapter(adapter);
+//                        ProductAdapter adapter = new ProductAdapter(mActivity, productList);
+//                        lv_search.setAdapter(adapter);
 
                     }
 

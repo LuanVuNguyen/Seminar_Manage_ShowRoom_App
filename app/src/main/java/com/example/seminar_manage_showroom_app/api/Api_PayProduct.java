@@ -3,6 +3,7 @@ package com.example.seminar_manage_showroom_app.api;
 import com.example.seminar_manage_showroom_app.common.Config;
 
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -12,22 +13,23 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class Api_CreateProduct {
+public class Api_PayProduct {
     private static final String BASE_URL = Config.HTTP_SERVER_SHOP;
 
     private OkHttpClient client;
 
-    public Api_CreateProduct() {
+    public Api_PayProduct() {
         client = new OkHttpClient();
     }
 
-    public void postData(String bookName, String author, String category,String rfid, String id, String price, String publisher, String image,  final Api_CreateProduct.ApiCallback callback) {
-        String json = "{\"bookname\":\"" + bookName + "\",\"author\":\"" + author + "\", \"cate\":\"" + category + "\",\"rfid\":\"" + rfid + "\",\"id\":\"" + id + "\", \"price\":\"" + price + "\", \"publisher\":\"" + publisher + "\", \"avt_book\":\"" + image + "\"}";
+    public void postData(String rfid, final Api_PayProduct.ApiCallback callback) {
+        String json = "{\"rfid\":\"" + rfid + "\"}";
+        System.out.println(json);
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
         RequestBody requestBody = RequestBody.create(mediaType, json);
 
         Request request = new Request.Builder()
-                .url(BASE_URL + Config.API_CREATE_PRODUCT)
+                .url(BASE_URL + Config.API_PAY_PRODUCT)
                 .post(requestBody)
                 .build();
 

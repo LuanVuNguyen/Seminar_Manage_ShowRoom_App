@@ -33,6 +33,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.seminar_manage_showroom_app.R;
 import com.example.seminar_manage_showroom_app.adapter.ListViewAdapterPay;
+import com.example.seminar_manage_showroom_app.api.Api_PayProduct;
 import com.example.seminar_manage_showroom_app.api.HttpPostRfid;
 import com.example.seminar_manage_showroom_app.api.HttpRfidResponse;
 import com.example.seminar_manage_showroom_app.common.Config;
@@ -68,7 +69,7 @@ import jp.co.toshibatec.model.TagPack;
 public class PayActivity extends AppCompatActivity implements HttpRfidResponse, View.OnClickListener {
 
     SQLiteDatabaseHandler database;
-    TextView txt_qty, txt_total, txt_cash, txt_change_cash;
+    TextView txt_qty, txt_total;
     Set<String> setCustomOutput = new HashSet<>();
     Set<String> setCustomInput = new HashSet<>();
     private int IS_SHOW_DIALOG_LIMIT = 0;
@@ -95,7 +96,9 @@ public class PayActivity extends AppCompatActivity implements HttpRfidResponse, 
     ConnectThreadScan connectThreadScan = null;
     private boolean isReadBackPress = false;
     private LinkedList<InforProductEntity> arrDataInList;
-
+    List<HttpPostRfid> listHttp = new ArrayList<>();
+    private List<String> RFID = new ArrayList<>();
+    private Api_PayProduct client = new Api_PayProduct();
 
 /*------------------------------------------------------------------------------*/
     @Override
@@ -176,7 +179,24 @@ public class PayActivity extends AppCompatActivity implements HttpRfidResponse, 
 
             case R.id.btn_pay_done:
             {
-                System.out.println("kjhhgsdfhjn");
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Confirm");
+                builder.setMessage("Are you sure you want to complete the payment?");
+                builder.setPositiveButton("Agree", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        PayProduct();
+                        showProgressRunUi();
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
                 break;
             }
         }
@@ -385,11 +405,7 @@ public class PayActivity extends AppCompatActivity implements HttpRfidResponse, 
     private BluetoothDevice bluetoothDeviceConnected2() {
         BluetoothDevice deviceTemp = null;
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-
-//        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//            Toast.makeText(InventoryActivity.this, "First enable LOCATION ACCESS in settings.", Toast.LENGTH_LONG).show();
-//        }
-
+        @SuppressLint("MissingPermission")
         Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
         if (pairedDevices.size() > 0) {
             // There are paired devices. Get the name and address of each paired device.
@@ -476,8 +492,6 @@ public class PayActivity extends AppCompatActivity implements HttpRfidResponse, 
     }
     private void addOtherBarcode(String bar_code) {
 
-        // SA-150 修正_UPC-A対応 EDIT START
-//        inforProductEntity.setProductCode1(bar_code);
         int bar_code_length = bar_code.length();
         switch (bar_code_length) {
             case 8:
@@ -555,7 +569,12 @@ public class PayActivity extends AppCompatActivity implements HttpRfidResponse, 
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                showProgress();
+                try {
+                    showProgress();
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -605,19 +624,6 @@ public class PayActivity extends AppCompatActivity implements HttpRfidResponse, 
         inforProductEntity = new InforProductEntity();
         restartListView();
     }
-    private void initListViewScreen() {
-
-        // check array null
-        arrDataInList = (LinkedList<InforProductEntity>) getLastCustomNonConfigurationInstance();
-
-        if (arrDataInList == null) {
-            arrDataInList = new LinkedList<>();
-        }
-
-        // Check if array is not null
-        restartListView();
-
-    }
     private void reloadSQLiteData(){
         setCustomOutput.clear();
         setCustomOutput.clear();
@@ -634,7 +640,6 @@ public class PayActivity extends AppCompatActivity implements HttpRfidResponse, 
 
     }
 
-    List<HttpPostRfid> listHttp = new ArrayList<>();
     @Override
     public void progressRfidFinish(String output, int typeRequestApi, String fileName) {
         // KILL ALL HTTP
@@ -648,26 +653,13 @@ public class PayActivity extends AppCompatActivity implements HttpRfidResponse, 
             JSONObject jsonObject = new JSONObject(output);
             if (SupModRfidCommon.isStatusHttpOk(output)) {
                 if (jsonObject.getString(Constants.KEY_CODE).equals(Constants.VALUE_CODE_OK)) {
-
                     JSONArray jArray = jsonObject.getJSONArray(Constants.KEY_DATA);
-
-                    Log.d("Response",""+jArray);
-
                     JSONArray jArray1 = jArray.getJSONArray(0);
-
-                    Log.d("Response head",""+jArray1);
-
                     for (int j = 0; j < jArray1.length() ; j++)
                     {
-
                         JSONObject obj2 = jArray1.getJSONObject(j);
-
-                        Log.d("obj2",""+obj2);
-
                         String stringRfid= obj2.getString(Constants.KEY_RFID);
-
-                        Log.d("stringRfid",""+stringRfid);
-
+                        RFID.add(stringRfid);
                         if(setCustomOutput.add(stringRfid))
                         {
                             try{
@@ -677,15 +669,6 @@ public class PayActivity extends AppCompatActivity implements HttpRfidResponse, 
                             {
                                 Log.e("save database faile",e.getMessage());
                             }
-
-                        }
-                        JSONArray err = jArray.getJSONArray(1);
-                        if (err != null) {
-                            for (int i = 0; i < err.length(); i++) {
-                                //setRfidNotFound.add(err.get(i).toString());
-                            }
-
-                            //total_error.setText(MessageFormat.format("{0} : {1}", getText(R.string.total_error), setRfidNotFound.size()+""));
                         }
                     }
                 }
@@ -694,6 +677,28 @@ public class PayActivity extends AppCompatActivity implements HttpRfidResponse, 
             }
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+    }
+    private void PayProduct(){
+        try {
+
+            for (String rfid : RFID) {
+                client.postData(rfid, new Api_PayProduct.ApiCallback() {
+                    @Override
+                    public void onSuccess(String response) {
+                        Log.d("Response", "Success");
+                    }
+
+                    @Override
+                    public void onError(String errorMessage) {
+                        Log.d("Response", "failed");
+                    }
+                });
+            }
+            dismissProgress();
+        }
+        catch (Exception e){
+            Log.e("Exception",e.getMessage());
         }
     }
 }

@@ -35,10 +35,10 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_weight="0.6"
+                android:layout_weight="1"
                 android:background="@drawable/cell_shape_title_3"
                 android:gravity="center"
-                android:text="ID"
+                android:text="RFID"
                 android:textColor="#000000" />
 
             <TextView

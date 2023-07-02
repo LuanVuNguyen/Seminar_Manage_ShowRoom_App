@@ -143,17 +143,17 @@ public class Constants {
     public static final String STT_CODE_Gateway_Timeout = "504";
     //incoming and outgoing
     public static final String CONFIG_INV_NAME="Company";
-    //#endregion
-    //language
-   // public static final String SELECT_ENGLISH=String.valueOf(R.string.english);
-   // public static final String SELECT_JAPANESE=String.valueOf(R.string.japanese);
-    // Device
-    //public static  String CONFIG_DEVICE_NAME="ATS100-SG UHF Reader";
     public static  String CONFIG_DEVICE_NAME="ATS100-SG UHF Reader";
     //public static  String CONFIG_DEVICE_NAME="Toshiba Tec";
     public static final String CONFIG_DEVICE_ATS100="ATS100-SG UHF Reader";
     public static final String CONFIG_DEVICE_TOSHIBATEC="Toshiba Tec";
     public static String CONFIG_SIGNAL_CONECT="0";
-    public static String CONFIG_RFID = "";
+    public static String uid = null;
+    public static String name = null;
+    public static String email = null;
+    public static String address = null;
+    public static String phone = null;
+    public static String DoB = null;
+    public static String avatar = null;
 
 }

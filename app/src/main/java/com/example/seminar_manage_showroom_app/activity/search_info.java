@@ -8,6 +8,8 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Insets;
 import android.graphics.Point;
 import android.media.AudioManager;
@@ -21,6 +23,7 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
@@ -122,6 +125,7 @@ public class search_info extends Fragment  implements HttpRfidResponseSearch {
     private List<String> list_cate = new ArrayList<>();
     private List<String> list_author = new ArrayList<>();
     private List<String> list_des = new ArrayList<>();
+    private ImageView avt_book;
 
     /*------------------------------------------------------------*/
 
@@ -188,6 +192,7 @@ public class search_info extends Fragment  implements HttpRfidResponseSearch {
         txt_author = (TextView) view.findViewById(R.id.txt_info_author);
         txt_cate =  (TextView) view.findViewById(R.id.txt_info_cate);
         txt_des = (TextView) view.findViewById(R.id.txt_info_des);
+        avt_book = (ImageView) view.findViewById(R.id.avt_book);
         return view;
     }
 
@@ -470,7 +475,7 @@ public class search_info extends Fragment  implements HttpRfidResponseSearch {
                     for (int j = 0; j < jArray1.length() ; j++)
                     {
                         JSONObject obj2 = jArray1.getJSONObject(j);
-
+                            System.out.println(obj2);
                             try{
                                   list_id.add(obj2.getString(Constants.KEY_JANCODE_1));
                                   list_bookname.add(obj2.getString(Constants.KEY_GOOD_NAME));
@@ -478,8 +483,13 @@ public class search_info extends Fragment  implements HttpRfidResponseSearch {
                                   list_cate.add(obj2.getString( "Product Category"));
                                   list_author.add(obj2.getString(Constants.KEY_COST));
                                   list_des.add(obj2.getString(Constants.KEY_COST));
+                                  String base64Avt = obj2.getString("Avt_book");
 
 
+
+                                  byte[] decodedString = Base64.decode(base64Avt, Base64.DEFAULT);
+                                  Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                                  avt_book.setImageBitmap(decodedByte);
                                   txt_name.setText(list_bookname.get(0));
                                   txt_id.setText(list_id.get(0));
                                   txt_rfid.setText(list_rfid.get(0));

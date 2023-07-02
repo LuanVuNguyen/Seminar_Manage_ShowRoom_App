@@ -106,6 +106,14 @@
             android:exported="false">
         </activity>
 
+        <activity android:name=".activity.ProfileActivity"
+            android:exported="false">
+        </activity>
+
+        <activity android:name=".activity.EditProfileActivity"
+            android:exported="false">
+        </activity>
+
     </application>
 
 </manifest>

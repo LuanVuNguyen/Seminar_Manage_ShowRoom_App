@@ -101,7 +101,7 @@ public class ListViewAdapterPay extends BaseAdapter implements Filterable {
         InforProductEntity item = list.get(position);
         viewHolder.lv_title_column1.setText(String.valueOf(position+1));
         viewHolder.lv_title_column3.setText(item.getGoodName());
-        viewHolder.lv_title_column2.setText(item.getBarcodeCD1());
+        viewHolder.lv_title_column2.setText(item.getRfidCode());
 //        viewHolder.lv_title_column5.setText(String.valueOf(item.getQuantity()));
         viewHolder.lv_title_column4.setText(String.valueOf(item.getBasePrice()));
         return convertView;

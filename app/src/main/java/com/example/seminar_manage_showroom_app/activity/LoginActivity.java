@@ -89,8 +89,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     }
                                     else{
                                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                                        intent.putExtra("uid", uid);
+                                        Constants.uid = uid;
                                         startActivity(intent);
+                                        finish();
                                     }
                                 }
                             }

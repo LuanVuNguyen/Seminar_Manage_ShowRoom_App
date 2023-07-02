@@ -1,8 +1,8 @@
 package com.example.seminar_manage_showroom_app.common;
 
 public class Config {
-    public static String HTTP_SERVER_SHOP = "http://192.168.1.56:8066";
-      //public static String HTTP_SERVER_SHOP = "http://192.168.112.4:8069";
+    //public static String HTTP_SERVER_SHOP = "http://192.168.1.56:8066";
+      public static String HTTP_SERVER_SHOP = "http://192.168.2.10:8069";
     /**
      * Method POST
      */
@@ -24,7 +24,7 @@ public class Config {
     /**
      * Api key
      */
-    public static final String DATABASE_NAME = "odoo";
+    public static final String DATABASE_NAME = "odoo_v2";
     /**
      * Api key value
      */
@@ -42,5 +42,8 @@ public class Config {
     public static final String API_INFO_USER = "/inventory_controller/get_user_info";
     public static final String API_CREATE_PRODUCT = "/inventory_controller/creat_new_product";
     public static final String API_GET_ALL_PRODUCT = "/inventory_controller/get_info_all_product";
+    public static final String API_EDIT_PROFILE_USER = "/inventory_controller/edit_user_info";
+    public static final String API_LOGOUT = "/web/session/destroy";
+    public static final String API_PAY_PRODUCT = "/inventory_controller/pay_product";
 
 }

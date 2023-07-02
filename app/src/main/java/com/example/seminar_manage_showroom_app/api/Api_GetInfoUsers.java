@@ -12,16 +12,16 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class Api_HomeClient {
+public class Api_GetInfoUsers {
     private static final String BASE_URL = Config.HTTP_SERVER_SHOP;
 
     private OkHttpClient client;
 
-    public Api_HomeClient() {
+    public Api_GetInfoUsers() {
         client = new OkHttpClient();
     }
 
-    public void postData(String uid,  final Api_HomeClient.ApiCallback callback) {
+    public void postData(String uid,  final Api_GetInfoUsers.ApiCallback callback) {
         String json = "{\"id\":\"" + uid + "\"}";
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
         RequestBody requestBody = RequestBody.create(mediaType, json);

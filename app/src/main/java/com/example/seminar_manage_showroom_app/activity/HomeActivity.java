@@ -1,10 +1,11 @@
 package com.example.seminar_manage_showroom_app.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Base64;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,11 +14,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bumptech.glide.Glide;
 import com.example.seminar_manage_showroom_app.R;
-import com.example.seminar_manage_showroom_app.api.Api_HomeClient;
+import com.example.seminar_manage_showroom_app.api.Api_GetInfoUsers;
+import com.example.seminar_manage_showroom_app.api.Api_LogOut;
+import com.example.seminar_manage_showroom_app.common.Config;
 import com.example.seminar_manage_showroom_app.common.Constants;
-import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,8 +27,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     private ImageView btn_search,btn_pay,btn_inventory,btn_creproduct,btn_setting,btn_profile,btn_logout,avatar;
     private TextView txt_device, txt_posite, txt_name;
-    private String uid = "2";
-    Api_HomeClient HomeClient = new Api_HomeClient();
+    Api_GetInfoUsers HomeClient = new Api_GetInfoUsers();
+    Api_LogOut ClientLogout = new Api_LogOut();
     private  int DOUBLE_BACK_PRESS_COUNT = 2;
     private int backPressedCount = 0;
     @Override
@@ -36,18 +37,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         init();
-        Intent intent = getIntent();
-        if (intent != null) {
-            String errorMessage = intent.getStringExtra("error_message");
-            if (errorMessage != null) {
-                onBackPressed();
-            } else {
-                uid = intent.getStringExtra("uid");
-            }
-        }
     }
     private void ApiGetUser(String uid){
-        HomeClient.postData(uid, new Api_HomeClient.ApiCallback() {
+        HomeClient.postData(uid, new Api_GetInfoUsers.ApiCallback() {
             @Override
             public void onSuccess(String response) {
                 try{
@@ -87,7 +79,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     e.printStackTrace();
                 }
             }
-
             @Override
             public void onError(String errorMessage) {
 
@@ -125,10 +116,36 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         txt_name = (TextView) findViewById(R.id.txt_name1);
         txt_posite = (TextView) findViewById(R.id.txt_posite);
-
-        ApiGetUser(uid);
+        ApiGetUser(Constants.uid);
     }
 
+    private void Logout(){
+            ClientLogout.Logout(Constants.uid, new Api_LogOut.ApiCallback() {
+                @Override
+                public void onSuccess(String response) {
+                    System.out.println(response);
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        if (jsonObject.getString(Constants.KEY_CODE).equals(Constants.VALUE_CODE_OK)) {
+                            if (jsonObject.getJSONObject("error") == null){
+                                Constants.uid = null;
+                                onBackPressed();
+                                finish();
+                            }
+                        }
+                    }
+                    catch (Exception e){
+
+                    }
+                }
+                @Override
+                public void onError(String errorMessage) {
+
+                }
+            });
+
+
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId())
@@ -160,14 +177,23 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
             case R.id.btn_profile:
             {
-
+                startActivity(new Intent(this, ProfileActivity.class));
+                break;
             }
-            case R.id.btn_logout:
-            {
-
+            case R.id.btn_logout: {
+                Constants.uid = null;
+                startActivity(new Intent(this, LoginActivity.class));
+                finish();
+                break;
             }
         }
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ApiGetUser(Constants.uid);
+    }
+
     @Override
     public void onBackPressed() {
         if (backPressedCount < DOUBLE_BACK_PRESS_COUNT - 1) {
@@ -177,5 +203,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             finishAffinity();
         }
     }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("uid", Constants.uid);
+        editor.apply();
+    }
+
 
 }

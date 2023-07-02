@@ -4,12 +4,9 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Insets;
 import android.graphics.Point;
 import android.media.AudioManager;
@@ -19,21 +16,16 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Display;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowInsets;
 import android.view.WindowManager;
 import android.view.WindowMetrics;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -44,15 +36,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.seminar_manage_showroom_app.R;
-import com.example.seminar_manage_showroom_app.adapter.ListViewScanAdapter;
 import com.example.seminar_manage_showroom_app.adapter.notify;
 import com.example.seminar_manage_showroom_app.api.Api_CreateProduct;
-import com.example.seminar_manage_showroom_app.api.Api_HomeClient;
 import com.example.seminar_manage_showroom_app.api.HttpPostRfid;
 import com.example.seminar_manage_showroom_app.api.HttpRfidResponse;
 import com.example.seminar_manage_showroom_app.common.Config;
 import com.example.seminar_manage_showroom_app.common.Constants;
-import com.example.seminar_manage_showroom_app.common.Message;
 import com.example.seminar_manage_showroom_app.common.entities.InforProductEntity;
 import com.example.seminar_manage_showroom_app.common.function.SupModRfidCommon;
 import com.example.seminar_manage_showroom_app.common.interfaces.Callable;
@@ -243,6 +232,15 @@ public class CreateProductActivity extends AppCompatActivity implements HttpRfid
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, dataList);
         lv_rfid.setAdapter(adapter);
     }
+    @Override
+    public void onDestroy() {
+        if(Constants.CONFIG_DEVICE_NAME.equals(Constants.CONFIG_DEVICE_ATS100)) {
+            connectThreadScan.cancel();
+        }
+        else if (TecRfidSuite.OPOS_SUCCESS != mLib.stopReadTags(mStopReadTagsResultCallback)){
+        }
+        super.onDestroy();
+    }
     private String itemtostring(){
         String text = "", select="";
         int convert=1;
@@ -290,6 +288,12 @@ public class CreateProductActivity extends AppCompatActivity implements HttpRfid
 
     }
     private void ApiGetUser(){
+        try {
+            showProgress();
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         String bookname = txt_bookname.getText().toString();
         String author = txt_author.getText().toString();
         String id = txt_id.getText().toString();
@@ -302,6 +306,7 @@ public class CreateProductActivity extends AppCompatActivity implements HttpRfid
                index++;
                id = id + "0" +Integer.toString(index);
             try {
+
                 createProduct.postData(bookname, author, id_categ, rfid, id, price, publisher, imagetobase64, new Api_CreateProduct.ApiCallback() {
                     @Override
                     public void onSuccess(String response) {
@@ -312,6 +317,7 @@ public class CreateProductActivity extends AppCompatActivity implements HttpRfid
                                 if (!resultObj.toString().isEmpty()) {
                                     String code = resultObj.getString("code");
                                     if (code.contains("201")) {
+                                        dismissProgress();
                                         showToast("Create product success");
                                     }
                                 } else {
@@ -335,6 +341,20 @@ public class CreateProductActivity extends AppCompatActivity implements HttpRfid
             }
             id = txt_id.getText().toString();
         }
+
+    }
+    private void showProgressRunUi(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    showProgress();
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     private void showToast(String s) {
