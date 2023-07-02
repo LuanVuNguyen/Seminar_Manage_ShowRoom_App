@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">図書館管理</string>
+    <string name="device_id">端末ID: </string>
+    <string name="app_version">アプリ版: </string>
+    <string name="database_version">データベース版: </string>
+    <string name="userid">ユーザーID</string>
+    <string name="password">パスワード</string>
+    <string name="rememberswitch">ログインの記憶</string>
+    <string name="webpos">WEBPOS</string>
+    <string name="smart_active">SMART ACTIVE</string>
+    <string name="login" >ログイン</string>
+    <string name="noaccount">まだアカウントをお持ちではありませんか？</string>
+    <string name="creataccount">作成</string>
+    <string name="forgotpassword">パスワードをお忘れの方</string>
+    <string name="privacy">プライバシーポリシー</string>
+    <!--Text language-->
+    <string name="english">English</string>
+    <string name="japanese">Japanese</string>
+    <!--Text menuapp-->
+    <string name="titlemenuapp">MENU APP</string>
+    <string name="btnname_product_manage">PRODUCT MANAGER</string>
+    <string name="btnname_scanner_Setting">SCANNER SETTING</string>
+    <!--Text managerproduct-->
+
+    <string name="title_managerproduct">プロダクトマネージャー</string>
+    <string name="btn_inventory">インベントリー</string>
+    <string name="btn_newincoing">NEW INCOMING</string>
+    <string name="btn_issue_book">発行図書</string>
+    <string name="btn_newoutgoing">NEW OUTGOING</string>
+    <string name="btn_report">REPORTS</string>
+    <!-- Text setting-->
+    <string name="setting"> 設定</string>
+    <string name="mac_address">MAC ADRESS:</string>
+    <string name="power">POWER(0-33):</string>
+    <string name="ip_address">IP ADDRESS:</string>
+    <string name="port">PORT:</string>
+    <string name="btn_save">SAVE</string>
+    <string name="btn_cancle">CANCLE</string>
+    <!-- Text fragmentin-->
+    <string name="TITLE_FRAGMENT_INCOMING">New Incoming</string>
+    <string name="serial">Serial</string>
+    <string name="dateinout">Date</string>
+    <string name="whname">WH Name</string>
+    <string name="typeincoming">Type Incoming</string>
+    <string name="cmt">Comment</string>
+    <!-- Text Inventory-->
+    <string name="title_inventory">インベントリー</string>
+    <string name="number_inventory">番号</string>
+    <string name="Name_inventory">Name</string>
+    <string name="Barcode_inventory">バーコード</string>
+    <string name="Quantity_inventory">数量</string>
+    <string name="Quantity_inventory_2">数量:</string>
+    <string name="Error_inventory">エラー:</string>
+    <!-- Text IssueBook-->
+    <string name="title_member">メンバー情報</string>
+    <string name="member_name">名前:</string>
+    <string name="member_ID">ID:</string>
+    <string name="Member_RFID">RFID:</string>
+    <string name="Member_gender">性別:</string>
+    <string name="Member_currentmembership">メンバーシップ:</string>
+    <string name="Member_contact">コンタクト:</string>
+    <string name="Book_number">番号</string>
+    <string name="Book_title">本のタイトル</string>
+    <string name="Book_RFID">RFID コード</string>
+    <string name="Book_author">著者</string>
+    <string name="Book_categories">カテゴリー</string>
+</resources>

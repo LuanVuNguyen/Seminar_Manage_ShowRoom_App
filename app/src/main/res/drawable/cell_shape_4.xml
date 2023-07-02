@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--Background BOOKS_RETURNS, MAGAZINE_RETURNS, MEDIA_RETURNS-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:right="2dp">
+        <shape android:shape="rectangle">
+            <stroke android:width="1dp"
+                android:color="#acdefe"/>
+        </shape>
+    </item>
+</layer-list>

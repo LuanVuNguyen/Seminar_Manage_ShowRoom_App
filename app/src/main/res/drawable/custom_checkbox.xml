@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 未チェック -->
+    <item
+        android:state_checked="false"
+        android:drawable="@drawable/and_btn_check_u" />
+
+    <!-- チェック済み -->
+    <item
+        android:state_checked="true"
+        android:drawable="@drawable/and_btn_check_s" />
+
+</selector>

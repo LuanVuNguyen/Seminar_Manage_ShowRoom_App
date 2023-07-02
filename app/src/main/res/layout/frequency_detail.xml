@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:id="@+id/time_popup_window" 
+    android:layout_width="match_parent" 
+    android:layout_height="match_parent" 
+    android:orientation="vertical" >
+
+    <TextView
+        android:padding="5dp"
+        android:background="#FFFFFFFF"
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content" 
+        android:text="Frequency detail infomation"
+        android:textSize="15sp" />
+
+    <TextView
+        android:padding="5dp"
+        android:background="#f0f0f0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" No. Ch. MHz      No. Ch. MHz\n------------------------  -------------------------\n01  05  916.8*    07  26  921.0\n02  11  918.0*    08  27  921.2\n03  17  919.2*    09  28  921.4\n04  23  920.4*    10  29  921.6\n05  24  920.6*    11  30  921.8\n06  25  920.8*    12  31  922.0\n                             13  32  922.2"
+        android:textSize="15sp" />
+    <TextView
+        android:padding="5dp"
+        android:background="#f0f0f0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FF0000"
+        android:text="ATTENTION:\n5-25ch is affected from other system."
+        android:textSize="15sp" />
+</LinearLayout>

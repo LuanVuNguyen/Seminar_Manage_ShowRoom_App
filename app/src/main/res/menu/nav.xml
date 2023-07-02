@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <item
+        android:id="@+id/nav_account"
+        android:icon="@drawable/user"
+        android:title="ACCOUNT"
+        android:visible="true"
+        android:background="@drawable/shape_item1"/>
+    <item
+        android:id="@+id/nav_menu_app"
+        android:icon="@drawable/menu"
+        android:title="MENU APP"
+        android:visible="true"
+        android:background="@drawable/shape_item1"/>
+    <item
+        android:id="@+id/nav_manager"
+        android:icon="@drawable/managericon"
+        android:title="PRODUCT MANAGER"
+        android:visible="true"
+        android:background="@drawable/shape_item1"/>
+    <item
+        android:id="@+id/nav_setting"
+        android:icon="@drawable/settings"
+        android:title="SETTING"
+        android:visible="true"
+        android:background="@drawable/shape_item1"/>
+    <item
+        android:id="@+id/nav_themes"
+        android:icon="@drawable/theme"
+        android:title="CHANGE THEMES"
+        android:visible="true"
+        android:background="@drawable/shape_item1"/>
+    <item
+        android:id="@+id/nav_logout"
+        android:icon="@drawable/power"
+        android:title="LOGOUT"
+        android:visible="true"
+        android:background="@drawable/shape_item_nav" />
+
+</menu>
