@@ -2,7 +2,8 @@ package com.example.seminar_manage_showroom_app.common;
 
 public class Config {
     //public static String HTTP_SERVER_SHOP = "http://192.168.1.56:8066";
-      public static String HTTP_SERVER_SHOP = "http://192.168.2.10:8069";
+    public static String HTTP_SERVER_SHOP = "http://192.168.2.10:8069";
+    //public static String HTTP_SERVER_SHOP = null;
     /**
      * Method POST
      */

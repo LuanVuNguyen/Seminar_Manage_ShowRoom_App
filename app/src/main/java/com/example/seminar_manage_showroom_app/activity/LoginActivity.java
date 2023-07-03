@@ -11,7 +11,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.seminar_manage_showroom_app.R;
-import com.example.seminar_manage_showroom_app.api.Api_GetInfoProduct;
 import com.example.seminar_manage_showroom_app.api.LoginClient;
 import com.example.seminar_manage_showroom_app.common.Config;
 import com.example.seminar_manage_showroom_app.common.Constants;
@@ -39,7 +38,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btn_Signup.setOnClickListener(this);
         btn_Login = findViewById(R.id.btn_login);
         btn_Login.setOnClickListener(this);
-        btn_Guest = findViewById(R.id.btn_login_guest);
+        btn_Guest = findViewById(R.id.btn_change_server);
         btn_Guest.setOnClickListener(this);
         txt_login = findViewById(R.id.txt_Login_email);
         txt_pwd = findViewById(R.id.txt_Login_email);
@@ -52,11 +51,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(new Intent(this, SignUpActivity.class));
                 break;
             case R.id.btn_login:
-                //startActivity(new Intent(this, HomeActivity.class));
                 getDataFromApi();
                 break;
-            case R.id.btn_login_guest:
-                startActivity(new Intent(this, SignUpActivity.class));
+            case R.id.btn_change_server:
+                startActivity(new Intent(this, ActivitySetupServer.class));
                 break;
         }
     }
@@ -104,14 +102,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 @Override
                 public void onError(String errorMessage) {
-
-                    Log.e("Error", errorMessage);
+                    Log.e("ssss",errorMessage);
+                    showToast(errorMessage);
                 }
             });
         }
     }
-
-
     private void showToast(String s) {
         runOnUiThread(new Runnable() {
             @Override
@@ -120,7 +116,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         });
     }
-
-
 }
 

@@ -329,7 +329,7 @@ public class InventoryActivity extends AppCompatActivity implements View.OnClick
                         Log.i("RFID data: ",""+mReadData.get(i));
                         jsonArraytoshiba.put(mReadData.get(i).toUpperCase());
                         if (jsonArraytoshiba.length() != 0) {
-                            new HttpPostRfid(InventoryActivity.this).execute(Config.CODE_LOGIN,Config.HTTP_SERVER_SHOP+Config.API_ODOO_GETMULTIPLEPRODUCT, jsonArraytoshiba.toString());
+                            new HttpPostRfid(InventoryActivity.this).execute(Config.CODE_LOGIN,Config.HTTP_SERVER_SHOP+Config. API_ODOO_GETMULTIPLEPRODUCT, jsonArraytoshiba.toString());
                         }
                         a.add(mReadData.get(i));
                         if (a.size() >= 50) {
@@ -618,7 +618,7 @@ public class InventoryActivity extends AppCompatActivity implements View.OnClick
             }
         } catch (Exception e)
         {
-            System.out.println(e.getMessage());
+            Log.d("Database Lite failed",e.getMessage());
         }
 
     }

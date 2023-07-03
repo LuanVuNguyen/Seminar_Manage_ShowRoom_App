@@ -2,6 +2,9 @@ package com.example.seminar_manage_showroom_app.activity;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.DialogInterface;
@@ -36,12 +39,15 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.seminar_manage_showroom_app.R;
+import com.example.seminar_manage_showroom_app.adapter.DialogYesNoFragment;
+import com.example.seminar_manage_showroom_app.adapter.ListViewScanAdapter;
 import com.example.seminar_manage_showroom_app.adapter.notify;
 import com.example.seminar_manage_showroom_app.api.Api_CreateProduct;
 import com.example.seminar_manage_showroom_app.api.HttpPostRfid;
 import com.example.seminar_manage_showroom_app.api.HttpRfidResponse;
 import com.example.seminar_manage_showroom_app.common.Config;
 import com.example.seminar_manage_showroom_app.common.Constants;
+import com.example.seminar_manage_showroom_app.common.Message;
 import com.example.seminar_manage_showroom_app.common.entities.InforProductEntity;
 import com.example.seminar_manage_showroom_app.common.function.SupModRfidCommon;
 import com.example.seminar_manage_showroom_app.common.interfaces.Callable;
@@ -276,24 +282,28 @@ public class CreateProductActivity extends AppCompatActivity implements HttpRfid
 
             case R.id.btn_clear2:
             {
+                actionDeleteAll(Constants.TYPE_TABLE_INVENTORY);
                 break;
 
             }
 
             case  R.id.btn_create:
             {
-                ApiGetUser();
+                try {
+                    showProgressRunUi();
+                    ApiGetUser();
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                break;
             }
         }
 
     }
     private void ApiGetUser(){
-        try {
-            showProgress();
-            Thread.sleep(200);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         String bookname = txt_bookname.getText().toString();
         String author = txt_author.getText().toString();
         String id = txt_id.getText().toString();
@@ -306,19 +316,20 @@ public class CreateProductActivity extends AppCompatActivity implements HttpRfid
                index++;
                id = id + "0" +Integer.toString(index);
             try {
-
                 createProduct.postData(bookname, author, id_categ, rfid, id, price, publisher, imagetobase64, new Api_CreateProduct.ApiCallback() {
                     @Override
                     public void onSuccess(String response) {
                         try {
+
                             JSONObject jsonObject = new JSONObject(response);
                             if (jsonObject.getString(Constants.KEY_CODE).equals(Constants.VALUE_CODE_OK)) {
                                 JSONObject resultObj = jsonObject.getJSONObject("result");
                                 if (!resultObj.toString().isEmpty()) {
                                     String code = resultObj.getString("code");
                                     if (code.contains("201")) {
-                                        dismissProgress();
                                         showToast("Create product success");
+                                        dismissProgress();
+
                                     }
                                 } else {
                                     showToast("Create product failled");
@@ -341,7 +352,7 @@ public class CreateProductActivity extends AppCompatActivity implements HttpRfid
             }
             id = txt_id.getText().toString();
         }
-
+        actionDeleteAll(Constants.TYPE_TABLE_INVENTORY);
     }
     private void showProgressRunUi(){
         runOnUiThread(new Runnable() {
@@ -560,11 +571,6 @@ public class CreateProductActivity extends AppCompatActivity implements HttpRfid
     private BluetoothDevice bluetoothDeviceConnected2() {
         BluetoothDevice deviceTemp = null;
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-
-//        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//            Toast.makeText(InventoryActivity.this, "First enable LOCATION ACCESS in settings.", Toast.LENGTH_LONG).show();
-//        }
-
         Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
         if (pairedDevices.size() > 0) {
             // There are paired devices. Get the name and address of each paired device.
@@ -648,6 +654,27 @@ public class CreateProductActivity extends AppCompatActivity implements HttpRfid
                 adapter.notifyDataSetChanged();
             }
         });
+    }
+    private void actionDeleteAll(String type) {
+        if (arrDataInList.isEmpty()) {
+            setCustomInput.clear();
+            setCustomOutput.clear();
+            setRfidNotFound.clear();
+            dataList.clear();
+            mReadData.clear();
+            mShowReadData.clear();
+            jsonArraytoshiba=new JSONArray();
+            inforProductEntity = new InforProductEntity();
+            avt_book.setImageResource(R.drawable.add_image);
+            txt_bookname.setText("");
+            txt_price.setText("");
+            txt_pub.setText("");
+            txt_id.setText("");
+            txt_author.setText("");
+            txt_count.setText("");
+            txt_cate.setText("");
+            adapter.notifyDataSetChanged();
+        }
     }
 
 }

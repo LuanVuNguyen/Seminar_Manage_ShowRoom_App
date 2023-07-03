@@ -86,8 +86,8 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="right|bottom"
-                    android:layout_marginBottom="20dp"
                     android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="20dp"
                     android:background="@drawable/play" />
 
                 <ImageView
@@ -97,8 +97,8 @@
                     android:layout_gravity="right|bottom"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="70dp"
-                    android:visibility="invisible"
-                    android:background="@drawable/btn_top" />
+                    android:background="@drawable/btn_top"
+                    android:visibility="invisible" />
 
                 <ImageView
                     android:id="@+id/btn_pay_clear"
@@ -271,4 +271,5 @@
             </FrameLayout>
         </LinearLayout>
     </LinearLayout>
+
 </LinearLayout>

@@ -260,6 +260,11 @@ public class search_info extends Fragment  implements HttpRfidResponseSearch {
                         jsonArraytoshiba.put(mReadData.get(i).toUpperCase());
                         if (jsonArraytoshiba.length() != 0) {
                             new HttpPostRfidSearch(search_info.this).execute(Config.CODE_LOGIN,Config.HTTP_SERVER_SHOP+Config.API_ODOO_GETMULTIPLEPRODUCT, jsonArraytoshiba.toString());
+                            try {
+                                Thread.sleep(500);
+                            } catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
                         }
                         a.add(mReadData.get(i));
                         a.clear();

@@ -2,6 +2,9 @@ package com.example.seminar_manage_showroom_app.activity;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.DialogInterface;
@@ -32,7 +35,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.seminar_manage_showroom_app.R;
+import com.example.seminar_manage_showroom_app.adapter.DialogYesNoFragment;
 import com.example.seminar_manage_showroom_app.adapter.ListViewAdapterPay;
+import com.example.seminar_manage_showroom_app.adapter.ListViewScanAdapter;
 import com.example.seminar_manage_showroom_app.api.Api_PayProduct;
 import com.example.seminar_manage_showroom_app.api.HttpPostRfid;
 import com.example.seminar_manage_showroom_app.api.HttpRfidResponse;
@@ -186,7 +191,6 @@ public class PayActivity extends AppCompatActivity implements HttpRfidResponse, 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         PayProduct();
-                        showProgressRunUi();
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -681,12 +685,17 @@ public class PayActivity extends AppCompatActivity implements HttpRfidResponse, 
     }
     private void PayProduct(){
         try {
-
+            try {
+                showProgressRunUi();
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             for (String rfid : RFID) {
                 client.postData(rfid, new Api_PayProduct.ApiCallback() {
                     @Override
                     public void onSuccess(String response) {
-                        Log.d("Response", "Success");
+                        showToast("Pay Success");
                     }
 
                     @Override
@@ -696,9 +705,35 @@ public class PayActivity extends AppCompatActivity implements HttpRfidResponse, 
                 });
             }
             dismissProgress();
+            actionDeleteAll(Constants.TYPE_TABLE_INVENTORY);
         }
         catch (Exception e){
             Log.e("Exception",e.getMessage());
+        }
+    }
+    private void initListViewScreen() {
+
+        // check array null
+        arrDataInList = (LinkedList<InforProductEntity>) getLastCustomNonConfigurationInstance();
+
+        if (arrDataInList == null) {
+            arrDataInList = new LinkedList<>();
+        }
+
+        // Check if array is not null
+        restartListView();
+
+    }
+    private void actionDeleteAll(String type) {
+        if (!arrDataInList.isEmpty()) {
+            setCustomInput.clear();
+            setCustomOutput.clear();
+            mReadData.clear();
+            mShowReadData.clear();
+            jsonArraytoshiba=new JSONArray();
+            inforProductEntity = new InforProductEntity();
+            database.deleteAllProductsinvbyTypeTable(type);
+            initListViewScreen();
         }
     }
 }

@@ -2,15 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".activity.LoginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:layout_weight="0.4"
         android:orientation="vertical">
 
         <ImageView
@@ -25,9 +25,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:text="Welcome\nBack App"
+            android:text="Welcome\n To Management App"
             android:textColor="#6672FF"
-            android:textSize="45sp"
+            android:textSize="30sp"
             android:textStyle="bold"
 
             />
@@ -36,7 +36,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"
         android:orientation="vertical">
 
         <EditText
@@ -51,9 +52,9 @@
             android:drawablePadding="16dp"
             android:ems="10"
             android:hint="Email or username"
-            android:text="admin"
             android:inputType="textPersonName"
             android:padding="16dp"
+            android:text="admin"
             android:textColorHint="#3D608c"
             android:textSize="18dp" />
 
@@ -69,9 +70,9 @@
             android:drawablePadding="16dp"
             android:ems="10"
             android:hint="Password"
-            android:text="admin"
             android:inputType="textPassword"
             android:padding="16dp"
+            android:text="admin"
             android:textColorHint="#3D608c"
             android:textSize="18dp" />
 
@@ -97,36 +98,38 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:layout_weight="0"
+        android:layout_weight="0.1"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/btn_creat"
             style="@android:style/Widget.Button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
             android:background="@drawable/shape_btn_signup"
             android:scaleType="fitXY" />
 
         <ImageButton
-            android:id="@+id/btn_login_guest"
+            android:id="@+id/btn_change_server"
             style="@android:style/Widget.Button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
             android:background="@drawable/shape_btn_guest"
             android:scaleType="fitXY" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -139,16 +142,6 @@
             android:layout_marginEnd="32dp"
             android:text=" Forget your password?"
             android:textColor="#3b608c" />
-
-        <TextView
-            android:id="@+id/resetPW"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="32dp"
-            android:text="reset password"
-            android:textColor="#96323a" />
 
     </LinearLayout>
 

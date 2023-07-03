@@ -112,7 +112,7 @@ public class HttpPostRfid extends AsyncTask<String, String, String> {
         try {
             switch (params[0]) {
                 case Config.CODE_LOGIN:
-                    jsonObject.put("name", new JSONArray(params[2]));
+                    jsonObject.put("RFID", new JSONArray(params[2]));
                     break;
                 default:
                     break;

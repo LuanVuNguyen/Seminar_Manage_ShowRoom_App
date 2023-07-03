@@ -13,7 +13,7 @@ import okhttp3.Response;
 import java.io.IOException;
 
 public class Api_GetInfoProduct {
-    private static final String BASE_URL = Config.HTTP_SERVER_SHOP;
+    private String BASE_URL = Config.HTTP_SERVER_SHOP;
 
     private OkHttpClient client;
 

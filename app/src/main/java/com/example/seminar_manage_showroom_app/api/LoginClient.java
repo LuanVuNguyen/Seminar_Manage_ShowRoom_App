@@ -18,8 +18,6 @@ import org.json.JSONObject;
 
 
 public class LoginClient {
-    private static final String BASE_URL = Config.HTTP_SERVER_SHOP;
-
     private OkHttpClient client;
 
     public LoginClient() {
@@ -31,7 +29,7 @@ public class LoginClient {
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
         RequestBody requestBody = RequestBody.create(mediaType, json);
         Request request = new Request.Builder()
-                .url(BASE_URL + Config.API_LOGIN)
+                .url(Config.HTTP_SERVER_SHOP + Config.API_LOGIN)
                 .post(requestBody)
                 .build();
 

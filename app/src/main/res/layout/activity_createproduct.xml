@@ -376,7 +376,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="1.8"
                         android:scaleType="fitCenter"
-                        tools:srcCompat="@tools:sample/avatars" />
+                        tools:srcCompat="@drawable/add_image" />
 
                 </LinearLayout>
 

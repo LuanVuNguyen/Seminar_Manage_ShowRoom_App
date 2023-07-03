@@ -47,7 +47,7 @@ public class Constants {
     /**
      * Column Rfid (new)
      */
-    public static final String COLUMN_RFID = "rfid";
+    public static final String COLUMN_RFID = "RFID";
     /**
      * Title Fragment
      */

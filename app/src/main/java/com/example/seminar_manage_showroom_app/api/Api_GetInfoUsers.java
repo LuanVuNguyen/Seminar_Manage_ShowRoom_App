@@ -13,7 +13,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class Api_GetInfoUsers {
-    private static final String BASE_URL = Config.HTTP_SERVER_SHOP;
+    private String BASE_URL = Config.HTTP_SERVER_SHOP;
 
     private OkHttpClient client;
 
@@ -25,7 +25,7 @@ public class Api_GetInfoUsers {
         String json = "{\"id\":\"" + uid + "\"}";
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
         RequestBody requestBody = RequestBody.create(mediaType, json);
-
+        System.out.println(BASE_URL);
         Request request = new Request.Builder()
                 .url(BASE_URL + Config.API_INFO_USER)
                 .post(requestBody)
